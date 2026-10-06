@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f4f0" />
+    <meta name="description" content="질문에 답하며 나만의 AI Skill을 만들고 SKILL.md로 내보내세요." />
+    <script>
+      try {
+        const savedTheme = localStorage.getItem('skill-studio-theme');
+        document.documentElement.dataset.theme = savedTheme === 'light' || savedTheme === 'dark'
+          ? savedTheme
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      } catch {
+        document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+    </script>
+    <title>Skill Studio — 나만의 Skill 만들기</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Skill Studio 처음으로"><span class="brand-mark" aria-hidden="true">✳</span><span>skill<span class="brand-light">studio</span></span></a>
+        <div class="topbar-right"><span class="local-pill"><span class="status-dot"></span> 내 브라우저에 자동 저장</span><button class="theme-toggle" type="button" id="theme-toggle" aria-label="다크 모드로 전환" title="다크 모드로 전환"><span class="theme-glyph" aria-hidden="true"></span></button><button class="button button-quiet top-export" type="button" data-action="download">SKILL.md 다운로드 <span aria-hidden="true">↗</span></button></div>
+      </header>
+
+      <main id="top">
+        <section class="editor-intro" aria-labelledby="page-title">
+          <div class="editor-intro-row"><div><span class="section-kicker">WORKSPACE</span><h1 id="page-title">새 Skill 만들기</h1><p>내 작업 방식을 적으면 오른쪽에서 <code>SKILL.md</code>로 정리됩니다.</p></div><span class="editor-count">01 — 03</span></div>
+        </section>
+
+        <section class="workspace" aria-label="Skill 만들기 작업 공간">
+          <div class="builder panel">
+            <div class="panel-heading"><div><span class="section-kicker">THE BUILDER</span><h2>Skill 설계</h2></div><span class="step-count">1 / 3</span></div>
+            <div class="template-row"><span class="small-label">빠르게 시작하기</span><div class="template-buttons" role="group" aria-label="시작 템플릿"><button type="button" class="template-chip is-active" data-template="blank">빈 문서</button><button type="button" class="template-chip" data-template="design">디자인</button><button type="button" class="template-chip" data-template="review">코드 리뷰</button><button type="button" class="template-chip" data-template="writing">글쓰기</button></div></div>
+
+            <form id="skill-form" novalidate>
+              <fieldset><legend><span class="field-number">01</span> 기본 정보</legend>
+                <label for="skill-name">Skill 이름 <span class="required">필수</span></label>
+                <input id="skill-name" name="name" type="text" autocomplete="off" spellcheck="false" maxlength="63" placeholder="예: thoughtful-ui-review" aria-describedby="name-help" />
+                <p class="field-help" id="name-help">영문 소문자, 숫자, 하이픈만 사용할 수 있어요.</p>
+                <label for="skill-description">이 Skill은 어떤 일을 하나요? <span class="required">필수</span></label>
+                <textarea id="skill-description" name="description" rows="3" placeholder="예: 기존 웹 UI의 계층과 간격을 점검하고 개선안을 제시합니다."></textarea>
+                <label for="skill-trigger">언제 사용하면 좋나요?</label>
+                <textarea id="skill-trigger" name="trigger" rows="2" placeholder="예: 사용자가 화면을 더 정돈하고 싶다고 요청할 때"></textarea>
+              </fieldset>
+
+              <fieldset><legend><span class="field-number">02</span> 작업 방식</legend>
+                <label for="skill-steps">어떤 순서로 작업해야 하나요?</label>
+                <textarea id="skill-steps" name="steps" rows="4" placeholder="한 줄에 한 단계씩 적어주세요.&#10;현재 화면을 살펴본다&#10;문제의 우선순위를 정한다&#10;한 번에 한 요소씩 수정한다"></textarea>
+                <p class="field-help">한 줄이 한 단계가 됩니다.</p>
+                <label for="skill-rules">꼭 지켜야 할 기준은 무엇인가요?</label>
+                <textarea id="skill-rules" name="rules" rows="4" placeholder="한 줄에 한 가지씩 적어주세요.&#10;기존 브랜드 색상은 유지한다&#10;작은 화면에서도 읽기 편해야 한다"></textarea>
+                <label for="skill-avoid">피해야 할 것은 무엇인가요?</label>
+                <textarea id="skill-avoid" name="avoid" rows="3" placeholder="예: 근거 없는 수치를 만들지 않는다"></textarea>
+              </fieldset>
+
+              <fieldset><legend><span class="field-number">03</span> 완료 기준</legend>
+                <label for="skill-output">결과물은 어떤 모습이어야 하나요?</label>
+                <textarea id="skill-output" name="output" rows="3" placeholder="예: 수정된 파일과 변경 이유를 간결하게 설명한다"></textarea>
+                <label for="skill-checks">완료 전에 무엇을 확인해야 하나요?</label>
+                <textarea id="skill-checks" name="checks" rows="3" placeholder="한 줄에 한 항목씩 적어주세요.&#10;모바일 화면을 확인한다&#10;키보드로 조작할 수 있는지 확인한다"></textarea>
+              </fieldset>
+            </form>
+            <div class="builder-footer"><button class="button button-subtle" type="button" data-action="reset">처음부터 다시</button><span>작성 내용은 이 브라우저에만 저장돼요.</span></div>
+          </div>
+
+          <aside class="preview-stack" aria-label="Skill 결과">
+            <div class="preview panel"><div class="panel-heading preview-heading"><div><span class="section-kicker">LIVE PREVIEW</span><h2>SKILL.md</h2></div><span class="live-indicator"><span></span> 실시간</span></div><div class="file-tabs"><span class="file-tab is-current"><span aria-hidden="true">▧</span> SKILL.md</span><span class="file-path" id="file-path">새 Skill</span></div><pre class="code-preview"><code id="markdown-preview"></code></pre><div class="preview-actions"><button class="button button-dark" type="button" data-action="copy">내용 복사 <span aria-hidden="true">↗</span></button><button class="button button-outline" type="button" data-action="download">파일 다운로드 <span aria-hidden="true">↓</span></button></div></div>
+            <div class="quality panel"><div class="quality-heading"><div><span class="section-kicker">QUALITY CHECK</span><h2>완성도 점검</h2></div><div class="score" aria-live="polite"><strong id="quality-score">0</strong><span>/ 6</span></div></div><div class="progress-track" aria-hidden="true"><span id="quality-progress"></span></div><ul id="quality-list" class="quality-list"></ul><p class="quality-note">점검은 내용의 유무를 알려줘요. 실제 지침이 명확한지도 직접 읽어보세요.</p></div>
+            <div class="help-card"><span class="help-icon" aria-hidden="true">↗</span><div><h3>이 파일을 어디에 쓰나요?</h3><p>다운로드한 파일을 <code>내-skill-이름/SKILL.md</code>로 놓고 Codex에 그 Skill을 사용해 달라고 요청하세요.</p></div></div>
+          </aside>
+        </section>
+      </main>
+      <footer class="site-footer"><span>skillstudio <span class="footer-star">✳</span></span><span>좋은 지침은 좋은 결과의 시작입니다.</span></footer>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
