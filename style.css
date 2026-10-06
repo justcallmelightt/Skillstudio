@@ -40,15 +40,21 @@ textarea,
 /* Builder page */
 .editor-intro { padding: 35px 0 32px; }
 .editor-intro-row { display: flex; align-items: end; justify-content: space-between; gap: 20px; }
-.editor-intro h1 { margin: 8px 0 7px; font-size: clamp(31px, 3vw, 43px); line-height: 1.13; letter-spacing: -.06em; font-weight: 650; }
+.editor-intro h1 { margin: 0 0 7px; font-size: clamp(31px, 3vw, 43px); line-height: 1.13; letter-spacing: -.06em; font-weight: 650; }
 .editor-intro p { margin: 0; color: #758176; font-size: 13px; }
 .editor-intro code { font-family: inherit; font-weight: 700; }
-.editor-count { padding-bottom: 5px; color: #8da28f; font-size: 11px; font-variant-numeric: tabular-nums; }
+.builder .panel-heading h2 { margin: 0; }
+.form-section { padding: 25px 0 30px; border-bottom: 1px solid #ecede8; }
+.form-section:last-child { border-bottom: 0; }
+.form-section h3 { display: flex; align-items: baseline; gap: 9px; margin: 0 0 27px; font-size: 14px; font-weight: 700; letter-spacing: -.025em; line-height: 1.4; }
+.form-section .field-number { margin: 0; }
+.form-section h3 + label { margin-top: 0; }
 
 @media (max-width: 620px) {
   .editor-intro { padding: 25px 0 26px; }
   .editor-intro p { font-size: 12px; }
-  .editor-count { display: none; }
+  .form-section { padding: 23px 0 27px; }
+  .form-section h3 { margin-bottom: 25px; }
 }
 
 /* Theme control stays compact beside the export action. */
@@ -83,7 +89,7 @@ textarea,
 :root[data-theme="dark"] .panel { background: #111; border-color: #2a2a2c; box-shadow: none; }
 :root[data-theme="dark"] .template-row,
 :root[data-theme="dark"] .builder-footer { background: #151515; border-color: #292929; }
-:root[data-theme="dark"] fieldset { border-color: #292929; }
+:root[data-theme="dark"] .form-section { border-color: #292929; }
 :root[data-theme="dark"] label { color: #e5e5e7; }
 :root[data-theme="dark"] input,
 :root[data-theme="dark"] textarea { color: #f5f5f7; background: #1c1c1e; border-color: #353537; }
@@ -125,3 +131,144 @@ textarea,
 :root[data-theme="dark"] input:focus-visible,
 :root[data-theme="dark"] textarea:focus-visible,
 :root[data-theme="dark"] a:focus-visible { outline-color: #d1d1d6; }
+
+/* The editor is an open work surface, not another card around the form. */
+.builder { padding: 0; }
+.builder .panel-heading h2 { margin: 1px 0 0; font-size: 22px; line-height: 1.25; letter-spacing: -.045em; }
+.builder .template-row { margin: 26px 0 0; padding: 0 0 27px; background: transparent; border: 0; border-bottom: 1px solid currentColor; }
+.builder .small-label { margin-bottom: 13px; }
+.builder .template-buttons { gap: 22px; }
+.builder .template-chip { min-height: 35px; padding: 5px 0 8px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: transparent; font-size: 13px; font-weight: 500; }
+.builder .template-chip.is-active { border-bottom-color: currentColor; background: transparent; font-weight: 700; }
+.builder .form-section { padding: 29px 0 34px; }
+.builder .form-section h3 { margin-bottom: 25px; font-size: 16px; letter-spacing: -.035em; }
+.builder .builder-footer { margin: 0; padding: 20px 0; background: transparent; border-top: 1px solid currentColor; }
+@media (max-width: 620px) {
+  .builder .template-row { margin-top: 23px; padding-bottom: 22px; }
+  .builder .template-buttons { gap: 17px; }
+  .builder .template-chip { font-size: 12px; }
+  .builder .form-section { padding: 25px 0 29px; }
+}
+
+/* Light mode: neutral canvas with blue reserved for deliberate actions and states. */
+:root[data-theme="light"] { color-scheme: light; color: #1d1d1f; background-color: #f6f8ff; background-image: linear-gradient(155deg, #fafcff 0%, #edf3ff 48%, #f6f8ff 100%); }
+:root[data-theme="light"] .topbar,
+:root[data-theme="light"] .site-footer { border-color: #d8d8dc; }
+:root[data-theme="light"] .brand-mark { color: #fff; background: #2754ed; }
+:root[data-theme="light"] .local-pill,
+:root[data-theme="light"] .editor-intro p,
+:root[data-theme="light"] .builder .small-label,
+:root[data-theme="light"] .field-help,
+:root[data-theme="light"] .builder-footer span,
+:root[data-theme="light"] .site-footer { color: #6e6e73; }
+:root[data-theme="light"] .builder .template-row,
+:root[data-theme="light"] .builder .form-section,
+:root[data-theme="light"] .builder .builder-footer { border-color: #d8d8dc; }
+:root[data-theme="light"] .builder .template-chip { color: #6e6e73; border-color: transparent; }
+:root[data-theme="light"] .builder .template-chip:hover { color: #1d1d1f; }
+:root[data-theme="light"] .builder .template-chip.is-active { color: #2754ed; border-bottom-color: #2754ed; }
+:root[data-theme="light"] .required { color: #6e6e73; }
+:root[data-theme="light"] label { color: #1d1d1f; }
+:root[data-theme="light"] input,
+:root[data-theme="light"] textarea { color: #1d1d1f; background: #fff; border-color: #d8d8dc; }
+:root[data-theme="light"] input::placeholder,
+:root[data-theme="light"] textarea::placeholder { color: #74747a; }
+:root[data-theme="light"] input:focus,
+:root[data-theme="light"] textarea:focus { border-color: #2754ed; box-shadow: 0 0 0 3px rgba(39,84,237,.12); }
+:root[data-theme="light"] .button-quiet,
+:root[data-theme="light"] .theme-toggle { color: #1d1d1f; background: #fff; border-color: #d8d8dc; }
+:root[data-theme="light"] .button-quiet:hover,
+:root[data-theme="light"] .theme-toggle:hover { background: #ededf0; border-color: #c7c7cc; }
+:root[data-theme="light"] .button-subtle { color: #6e6e73; border-color: #d1d1d6; }
+:root[data-theme="light"] .button-subtle:hover { color: #1d1d1f; background: #e9e9ed; }
+:root[data-theme="light"] .panel { color: #1d1d1f; background: #fff; border-color: #e2e2e6; box-shadow: 0 8px 28px rgba(0,0,0,.035); }
+:root[data-theme="light"] .panel .section-kicker,
+:root[data-theme="light"] .panel .live-indicator,
+:root[data-theme="light"] .panel .score,
+:root[data-theme="light"] .panel .step-count { color: #6e6e73; }
+:root[data-theme="light"] .file-tabs { color: #6e6e73; background: #f5f5f7; border-color: #e5e5e7; }
+:root[data-theme="light"] .file-tab { color: #1d1d1f; background: #fff; border-color: #dedee1; border-bottom-color: #fff; }
+:root[data-theme="light"] .file-path,
+:root[data-theme="light"] .quality-note { color: #8e8e93; }
+:root[data-theme="light"] .code-preview { color: #333337; background: #fff; }
+:root[data-theme="light"] .preview-actions { border-color: #e5e5e7; }
+:root[data-theme="light"] .button-dark { color: #fff; background: #2754ed; }
+:root[data-theme="light"] .button-dark:hover { background: #1743d8; }
+:root[data-theme="light"] .button-outline { color: #1d1d1f; background: #fff; border-color: #d1d1d6; }
+:root[data-theme="light"] .button-outline:hover { background: #f2f2f4; border-color: #a1a1a6; }
+:root[data-theme="light"] .score strong,
+:root[data-theme="light"] .quality-list li.is-complete { color: #2754ed; }
+:root[data-theme="light"] .quality-list { color: #6e6e73; }
+:root[data-theme="light"] .progress-track { background: #e5e5e7; }
+:root[data-theme="light"] .progress-track span { background: #2754ed; }
+:root[data-theme="light"] .help-card { color: #1d1d1f; background: #f5f5f7; border-color: #e5e5e7; }
+:root[data-theme="light"] .help-icon { color: #1d1d1f; background: #e5e5e7; }
+:root[data-theme="light"] .help-card p { color: #6e6e73; }
+:root[data-theme="light"] .help-card code { color: #1d1d1f; background: #e5e5e7; }
+:root[data-theme="light"] .status-dot,
+:root[data-theme="light"] .live-indicator span { background: #2754ed; box-shadow: 0 0 0 3px rgba(39,84,237,.12); }
+:root[data-theme="light"] .panel .live-indicator span { background: #2754ed; box-shadow: 0 0 0 3px rgba(39,84,237,.12); }
+:root[data-theme="light"] .footer-star { color: #2754ed; }
+:root[data-theme="light"] .toast { color: #fff; background: #1d1d1f; }
+:root[data-theme="light"] button:focus-visible,
+:root[data-theme="light"] input:focus-visible,
+:root[data-theme="light"] textarea:focus-visible,
+:root[data-theme="light"] a:focus-visible { outline-color: #2754ed; }
+
+:root[data-theme="dark"] .builder .template-row,
+:root[data-theme="dark"] .builder .form-section,
+:root[data-theme="dark"] .builder .builder-footer { background: transparent; border-color: #333336; }
+:root[data-theme="dark"] .builder .template-chip { color: #a1a1a6; background: transparent; border: 0; border-bottom: 2px solid transparent; }
+:root[data-theme="dark"] .builder .template-chip:hover { color: #fff; background: transparent; }
+:root[data-theme="dark"] .builder .template-chip.is-active { color: #fff; background: transparent; border-bottom-color: #fff; }
+
+/* Platform help is part of the work area, not a promotional card. */
+.platform-guide { padding: 23px 4px 8px; color: inherit; }
+.guide-heading h2 { margin: 0; font-size: 17px; font-weight: 650; letter-spacing: -.035em; line-height: 1.15; }
+.guide-heading p { margin: 7px 0 18px; color: #8e8e93; font-size: 12px; line-height: 1.55; }
+.guide-tabs { display: flex; gap: 10px; border-bottom: 1px solid #d8d8dc; }
+.guide-tab { display: inline-flex; align-items: center; gap: 8px; min-width: 0; padding: 7px 8px 11px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: #77777c; text-align: left; transition: color .16s ease, border-color .16s ease, transform .16s ease; }
+.guide-tab:hover, .guide-tab.is-active { color: #1d1d1f; }
+.guide-tab.is-active { border-bottom-color: #2754ed; }
+.guide-tab:active { transform: scale(.96); }
+.guide-logo { display: block; width: 35px; height: 35px; flex: none; overflow: hidden; border-radius: 9px; background: #fff; }
+.guide-logo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.guide-tab[data-guide-tab="claude"] .guide-logo { background: #e67b56; }
+.guide-tab[data-guide-tab="claude"] img { transform: scale(1.4); }
+.guide-brand { white-space: nowrap; font-size: 14px; line-height: 1.1; }
+.guide-brand-codex { font-family: 'OpenAI Sans', 'Pretendard', sans-serif; font-weight: 650; letter-spacing: -.035em; }
+.guide-brand-claude { font-family: 'Styrene A', 'Pretendard', sans-serif; font-weight: 600; letter-spacing: -.025em; }
+.guide-panel { padding: 13px 8px 0; font-size: 12px; line-height: 1.55; }
+.guide-panel[hidden] { display: none; }
+.guide-panel > p { margin: 11px 0 5px; color: #6e6e73; }
+.guide-path { display: block; overflow-wrap: anywhere; padding: 9px 11px; border-radius: 7px; background: #eceff5; color: #25252a; font-family: 'Pretendard', sans-serif; font-size: 11px; }
+.guide-panel .guide-note { margin-top: 15px; line-height: 1.65; }
+.guide-panel a { display: inline-block; margin-top: 7px; color: #2754ed; font-size: 11px; }
+.guide-panel a:hover { text-decoration: underline; }
+:root[data-theme="dark"] .guide-tabs { border-color: #303033; }
+:root[data-theme="dark"] .guide-tab { color: #aaaab0; }
+:root[data-theme="dark"] .guide-tab:hover, :root[data-theme="dark"] .guide-tab.is-active { color: #f5f5f7; }
+:root[data-theme="dark"] .guide-tab.is-active { border-bottom-color: #f5f5f7; }
+:root[data-theme="dark"] .guide-path { background: #1b1b1d; color: #eeeef0; }
+:root[data-theme="dark"] .guide-panel > p { color: #a1a1a6; }
+:root[data-theme="dark"] .guide-panel a { color: #d1d1d6; }
+@media (prefers-reduced-motion: reduce) { .guide-tab { transition: color .15s ease, border-color .15s ease; } }
+
+/* Form controls keep native semantics, with a calmer and content-sized surface. */
+.builder input,
+.builder textarea { border-radius: 11px; padding: 14px 15px; font-size: 14px; line-height: 1.55; }
+.builder input { height: 48px; }
+.builder textarea { resize: none; overflow: hidden; }
+.builder textarea[rows="2"] { min-height: 86px; }
+.builder textarea[rows="3"] { min-height: 112px; }
+.builder textarea[rows="4"] { min-height: 138px; }
+.builder label { margin-bottom: 10px; font-size: 13px; }
+.builder .field-help { margin-top: 9px; font-size: 12px; }
+:root[data-theme="light"] .builder input:hover,
+:root[data-theme="light"] .builder textarea:hover { border-color: #b7b7bd; }
+:root[data-theme="light"] .builder input:focus,
+:root[data-theme="light"] .builder textarea:focus { border-color: #2754ed; box-shadow: 0 0 0 3px rgba(39,84,237,.12); }
+:root[data-theme="dark"] .builder input:hover,
+:root[data-theme="dark"] .builder textarea:hover { border-color: #69696e; }
+:root[data-theme="dark"] .builder input:focus,
+:root[data-theme="dark"] .builder textarea:focus { border-color: #b6b6ba; box-shadow: 0 0 0 3px rgba(255,255,255,.11); }

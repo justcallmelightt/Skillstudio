@@ -8,13 +8,14 @@ const progress = document.querySelector('#quality-progress');
 const qualityList = document.querySelector('#quality-list');
 const toast = document.querySelector('#toast');
 const themeToggle = document.querySelector('#theme-toggle');
+const guideTabs = [...document.querySelectorAll('[data-guide-tab]')];
 const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
 let toastTimer;
 
 function syncThemeControl() {
   const isDark = document.documentElement.dataset.theme === 'dark';
   const nextTheme = isDark ? '라이트' : '다크';
-  document.querySelector('meta[name="theme-color"]').content = isDark ? '#000000' : '#f5f4f0';
+  document.querySelector('meta[name="theme-color"]').content = isDark ? '#000000' : '#fafcff';
   themeToggle.setAttribute('aria-label', `${nextTheme} 모드로 전환`);
   themeToggle.title = `${nextTheme} 모드로 전환`;
 }
@@ -118,8 +119,28 @@ function saveDraft(draft) {
   catch { /* Private browsing can block local storage. Editing still works. */ }
 }
 
+function resizeTextareas() {
+  form.querySelectorAll('textarea').forEach((field) => {
+    field.style.height = 'auto';
+    const minimum = parseFloat(getComputedStyle(field).minHeight) || 0;
+    field.style.height = `${Math.max(field.scrollHeight, minimum)}px`;
+  });
+}
+
 function render() {
   const draft = readDraft();
+  const guideName = draft.name && checks[0].test(draft) ? draft.name : 'my-skill';
+  const guideRoots = {
+    'codex-project': '.agents/skills/',
+    'codex-personal': '~/.agents/skills/',
+    'claude-project': '.claude/skills/',
+    'claude-personal': '~/.claude/skills/'
+  };
+  document.querySelectorAll('[data-guide-path]').forEach((element) => {
+    element.textContent = `${guideRoots[element.dataset.guidePath]}${guideName}/SKILL.md`;
+  });
+  document.querySelectorAll('[data-guide-name]').forEach((element) => { element.textContent = guideName; });
+  resizeTextareas();
   preview.textContent = markdownFor(draft);
   filePath.textContent = draft.name && checks[0].test(draft) ? `${draft.name}/SKILL.md` : '새 Skill';
   const passed = checks.filter((check) => check.test(draft)).length;
@@ -133,6 +154,27 @@ function render() {
   }));
   saveDraft(draft);
 }
+
+function selectGuide(id, focus = false) {
+  guideTabs.forEach((tab) => {
+    const selected = tab.dataset.guideTab === id;
+    tab.classList.toggle('is-active', selected);
+    tab.setAttribute('aria-selected', String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+    document.querySelector(`#guide-${tab.dataset.guideTab}`).hidden = !selected;
+    if (selected && focus) tab.focus();
+  });
+}
+
+guideTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => selectGuide(tab.dataset.guideTab));
+  tab.addEventListener('keydown', (event) => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+    const nextIndex = event.key === 'Home' ? 0 : event.key === 'End' ? guideTabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + guideTabs.length) % guideTabs.length;
+    selectGuide(guideTabs[nextIndex].dataset.guideTab, true);
+  });
+});
 
 function loadDraft(draft) {
   FIELD_NAMES.forEach((name) => { form.elements[name].value = draft[name] || ''; });
