@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fafcff" />
+    <meta name="description" content="AI Skill이 무엇인지, SKILL.md를 어떻게 만들고 사용하는지 알아보세요." />
+    <script>
+      try {
+        const savedTheme = localStorage.getItem('skill-studio-theme');
+        document.documentElement.dataset.theme = savedTheme === 'light' || savedTheme === 'dark'
+          ? savedTheme
+          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      } catch {
+        document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+    </script>
+    <title>Skill이란? — Skill Studio</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./about.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="./index.html" aria-label="Skill Studio 처음으로"><span class="brand-mark" aria-hidden="true">✳</span><span>skill<span class="brand-light">studio</span></span></a>
+        <div class="topbar-right"><button class="theme-toggle" type="button" id="theme-toggle" aria-label="다크 모드로 전환" title="다크 모드로 전환"><span class="theme-glyph" aria-hidden="true"></span></button><a class="button button-quiet about-top-action" href="./index.html">Skill 만들기 <span aria-hidden="true">↗</span></a></div>
+      </header>
+
+      <main class="about-main">
+        <header class="about-intro">
+          <p class="about-overline">Skill Studio 안내</p>
+          <h1>Skill이란?</h1>
+          <p class="about-lead">AI에게 매번 다시 설명하던 작업 방식을, 다음에도 꺼내 쓸 수 있도록 정리한 지침입니다.</p>
+        </header>
+
+        <section class="about-definition" aria-labelledby="definition-title">
+          <div><h2 id="definition-title">파일 하나에서 시작해요.</h2><p>Skill의 중심은 <code>SKILL.md</code>라는 문서입니다. 어떤 일을 맡길지, 언제 사용하면 좋은지, 어떤 순서와 기준을 따라야 하는지를 적습니다. 필요하면 참고 자료나 스크립트를 같은 폴더에 더할 수도 있어요.</p></div>
+          <div class="about-example"><span>예를 들면</span><p>“코드 리뷰할 때 추측은 빼고, 재현 가능한 문제와 근거부터 찾아줘.”</p><small>이 작업 방식을 Skill로 저장해두면 다음 리뷰에서도 다시 활용할 수 있습니다.</small></div>
+        </section>
+
+        <section class="about-steps" aria-labelledby="steps-title">
+          <h2 id="steps-title">이 사이트에서는 이렇게 만듭니다.</h2>
+          <div class="about-step-list">
+            <div class="about-step"><span>작성</span><p>이름과 역할, 작업 방식, 꼭 지킬 기준을 적습니다.</p></div>
+            <div class="about-step"><span>확인</span><p>오른쪽 미리보기에서 만들어질 <code>SKILL.md</code> 내용을 읽습니다.</p></div>
+            <div class="about-step"><span>사용</span><p>파일을 다운로드한 뒤 Codex 또는 Claude Code의 Skill 폴더에 넣습니다.</p></div>
+          </div>
+          <p class="about-caveat">이 사이트는 파일을 만들어 줄 뿐, Skill을 자동 설치하거나 AI 작업을 대신 실행하지는 않습니다.</p>
+        </section>
+
+        <section class="about-next" aria-labelledby="next-title"><div><h2 id="next-title">내 작업 방식으로 시작해볼까요?</h2><p>처음이라면 템플릿을 고른 뒤 문장을 조금씩 바꿔도 됩니다. 저장 위치는 편집 화면의 Codex·Claude Code 안내에서 확인하세요.</p></div><a class="button button-dark" href="./index.html">새 Skill 만들기 <span aria-hidden="true">↗</span></a></section>
+        <p class="about-sources">더 자세한 사용법: <a href="https://learn.chatgpt.com/docs/build-skills" target="_blank" rel="noopener noreferrer">Codex 공식 문서</a> · <a href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener noreferrer">Claude Code 공식 문서</a></p>
+      </main>
+
+      <footer class="site-footer"><span class="footer-brands"><span>skillstudio <span class="footer-star">✳</span></span><span class="footer-divider" aria-hidden="true">·</span><span class="footer-lightframe"><img src="./assets/lightframe-logo.png" alt="Lightframe" width="56" height="14" /></span></span><span>좋은 지침은 좋은 결과의 시작입니다.</span></footer>
+    </div>
+  </body>
+</html>

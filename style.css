@@ -227,17 +227,21 @@ textarea,
 .guide-heading h2 { margin: 0; font-size: 17px; font-weight: 650; letter-spacing: -.035em; line-height: 1.15; }
 .guide-heading p { margin: 7px 0 18px; color: #8e8e93; font-size: 12px; line-height: 1.55; }
 .guide-tabs { display: flex; gap: 10px; border-bottom: 1px solid #d8d8dc; }
+@media (max-width: 960px) { .guide-tabs { flex-wrap: wrap; } }
 .guide-tab { display: inline-flex; align-items: center; gap: 8px; min-width: 0; padding: 7px 8px 11px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: #77777c; text-align: left; transition: color .16s ease, border-color .16s ease, transform .16s ease; }
 .guide-tab:hover, .guide-tab.is-active { color: #1d1d1f; }
 .guide-tab.is-active { border-bottom-color: #2754ed; }
 .guide-tab:active { transform: scale(.96); }
 .guide-logo { display: block; width: 35px; height: 35px; flex: none; overflow: hidden; border-radius: 9px; background: #fff; }
 .guide-logo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.guide-tab[data-guide-tab="claude"] .guide-logo { background: #e67b56; }
-.guide-tab[data-guide-tab="claude"] img { transform: scale(1.4); }
-.guide-brand { white-space: nowrap; font-size: 14px; line-height: 1.1; }
-.guide-brand-codex { font-family: 'OpenAI Sans', 'Pretendard', sans-serif; font-weight: 650; letter-spacing: -.035em; }
-.guide-brand-claude { font-family: 'Styrene A', 'Pretendard', sans-serif; font-weight: 600; letter-spacing: -.025em; }
+.guide-tab[data-guide-tab="claude"] .guide-logo { background: transparent; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.guide-wordmark { display: block; flex: none; background-repeat: no-repeat; }
+/* Keep the source artwork intact; the background window reveals only its lettering. */
+.guide-wordmark-codex { width: 86px; height: 23px; background-image: url('./assets/codex-lockup.svg'); background-size: 177px 62px; background-position: -72px -19px; }
+.guide-wordmark-claude { width: 170px; height: 23px; background-color: #d97757; -webkit-mask: url('./assets/claude-wordmark-cutout.png') -8px -18px / 175px 58px no-repeat; mask: url('./assets/claude-wordmark-cutout.png') -8px -18px / 175px 58px no-repeat; }
+:root[data-theme="dark"] .guide-wordmark-codex { filter: invert(1); }
+:root[data-theme="dark"] .guide-wordmark-claude { background-color: #fff; }
 .guide-panel { padding: 13px 8px 0; font-size: 12px; line-height: 1.55; }
 .guide-panel[hidden] { display: none; }
 .guide-panel > p { margin: 11px 0 5px; color: #6e6e73; }
@@ -252,6 +256,7 @@ textarea,
 :root[data-theme="dark"] .guide-path { background: #1b1b1d; color: #eeeef0; }
 :root[data-theme="dark"] .guide-panel > p { color: #a1a1a6; }
 :root[data-theme="dark"] .guide-panel a { color: #d1d1d6; }
+@media (max-width: 450px) { .guide-tabs { gap: 6px; } .guide-tab { gap: 6px; padding-inline: 4px; } .guide-logo { width: 30px; height: 30px; } .guide-wordmark-claude { width: 148px; height: 22px; -webkit-mask-size: 160px 53px; mask-size: 160px 53px; -webkit-mask-position: -6px -16px; mask-position: -6px -16px; } }
 @media (prefers-reduced-motion: reduce) { .guide-tab { transition: color .15s ease, border-color .15s ease; } }
 
 /* Form controls keep native semantics, with a calmer and content-sized surface. */
@@ -263,6 +268,51 @@ textarea,
 .builder textarea[rows="3"] { min-height: 112px; }
 .builder textarea[rows="4"] { min-height: 138px; }
 .builder label { margin-bottom: 10px; font-size: 13px; }
+
+/* A short companion guide, separate from the working editor. */
+.intro-guide-link { flex: none; align-self: center; color: #2754ed; font-size: 12px; font-weight: 650; transition: opacity .15s ease, transform .15s ease; }
+.intro-guide-link:hover { opacity: .7; }
+.intro-guide-link:active { transform: scale(.975); }
+.about-main { max-width: 960px; margin: 0 auto; padding: 68px 0 88px; }
+.about-overline { margin: 0 0 16px; color: #6e6e73; font-size: 12px; font-weight: 650; }
+.about-intro h1 { margin: 0; font-size: clamp(46px, 6vw, 72px); line-height: 1.08; letter-spacing: -.065em; font-weight: 680; }
+.about-lead { max-width: 650px; margin: 23px 0 0; color: #55555c; font-size: clamp(17px, 2vw, 21px); line-height: 1.65; word-break: keep-all; }
+.about-definition { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 54px; align-items: start; margin-top: 72px; padding-top: 30px; border-top: 1px solid #d8d8dc; }
+.about-main h2 { margin: 0; font-size: 22px; line-height: 1.18; letter-spacing: -.04em; font-weight: 650; }
+.about-definition p, .about-next p { margin: 14px 0 0; color: #626268; font-size: 14px; line-height: 1.8; word-break: keep-all; }
+.about-main code { font-family: 'Pretendard', sans-serif; font-size: .92em; font-weight: 700; }
+.about-example { padding: 22px 24px; border-radius: 16px; background: #fff; box-shadow: 0 8px 28px rgba(0,0,0,.035); }
+.about-example span { color: #6e6e73; font-size: 11px; font-weight: 650; }
+.about-example p { margin: 15px 0 14px; color: #1d1d1f; font-size: 17px; line-height: 1.5; font-weight: 590; letter-spacing: -.025em; }
+.about-example small { color: #74747a; font-size: 11px; line-height: 1.6; }
+.about-steps { margin-top: 70px; }
+.about-step-list { display: grid; gap: 0; margin-top: 23px; border-top: 1px solid #d8d8dc; }
+.about-step { display: grid; grid-template-columns: 110px 1fr; gap: 16px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid #d8d8dc; }
+.about-step span { font-size: 14px; font-weight: 700; }
+.about-step p { margin: 0; color: #626268; font-size: 13px; line-height: 1.7; }
+.about-caveat { margin: 18px 0 0; color: #6e6e73; font-size: 12px; line-height: 1.65; }
+.about-next { display: flex; justify-content: space-between; align-items: center; gap: 32px; margin-top: 78px; padding: 29px 0 0; border-top: 1px solid #d8d8dc; }
+.about-next p { max-width: 600px; font-size: 13px; }
+.about-next .button { flex: none; }
+.about-sources { margin: 39px 0 0; color: #797980; font-size: 11px; line-height: 1.7; }
+.about-sources a { text-decoration: underline; text-underline-offset: 3px; }
+.about-sources a:hover { color: #2754ed; }
+.about-main a:active, .about-top-action:active, .brand:active { opacity: .72; }
+.footer-brands { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.footer-divider { color: #8e8e93; }
+.footer-lightframe { display: inline-flex; align-items: center; justify-content: center; }
+.footer-lightframe img { display: block; width: 56px; height: auto; filter: brightness(0); }
+:root[data-theme="dark"] .footer-lightframe img { filter: none; }
+:root[data-theme="dark"] .intro-guide-link, :root[data-theme="dark"] .about-sources a:hover { color: #f5f5f7; }
+:root[data-theme="dark"] .about-overline, :root[data-theme="dark"] .about-sources, :root[data-theme="dark"] .about-caveat { color: #a1a1a6; }
+:root[data-theme="dark"] .about-lead, :root[data-theme="dark"] .about-definition p, :root[data-theme="dark"] .about-next p, :root[data-theme="dark"] .about-step p { color: #b7b7bd; }
+:root[data-theme="dark"] .about-definition, :root[data-theme="dark"] .about-step-list, :root[data-theme="dark"] .about-step, :root[data-theme="dark"] .about-next { border-color: #303033; }
+:root[data-theme="dark"] .about-example { background: #171719; box-shadow: none; }
+:root[data-theme="dark"] .about-example span, :root[data-theme="dark"] .about-example small { color: #a1a1a6; }
+:root[data-theme="dark"] .about-example p { color: #f5f5f7; }
+@media (max-width: 720px) { .about-main { padding: 42px 0 70px; } .about-definition { grid-template-columns: 1fr; gap: 22px; margin-top: 50px; } .about-steps { margin-top: 52px; } .about-next { align-items: flex-start; flex-direction: column; margin-top: 58px; } }
+@media (max-width: 620px) { .editor-intro-row { align-items: flex-start; flex-direction: column; gap: 13px; } .intro-guide-link { align-self: flex-start; } .about-main h2 { font-size: 20px; } .about-lead { margin-top: 18px; } .about-step { grid-template-columns: 72px 1fr; gap: 10px; } .about-top-action { min-height: 35px; padding: 0 12px; font-size: 11px; } }
+@media (prefers-reduced-motion: reduce) { .intro-guide-link { transition: opacity .15s ease; } }
 .builder .field-help { margin-top: 9px; font-size: 12px; }
 :root[data-theme="light"] .builder input:hover,
 :root[data-theme="light"] .builder textarea:hover { border-color: #b7b7bd; }
