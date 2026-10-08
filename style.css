@@ -191,6 +191,16 @@ textarea,
 :root[data-theme="light"] .file-path,
 :root[data-theme="light"] .quality-note { color: #8e8e93; }
 :root[data-theme="light"] .code-preview { color: #333337; background: #fff; }
+:root[data-theme="light"] .code-preview { --md-marker: #357b96; --md-heading: #275f7d; --md-key: #a45c76; --md-string: #86643e; --md-emphasis: #996d22; --md-link: #337985; --md-code: #89589a; --md-divider: #9496a0; }
+:root[data-theme="dark"] .code-preview { --md-marker: #83b6ca; --md-heading: #9bc8d7; --md-key: #c79ab9; --md-string: #c9a88b; --md-emphasis: #e2b964; --md-link: #83bdc6; --md-code: #c4a3d2; --md-divider: #85868e; }
+.code-preview .md-marker { color: var(--md-marker); }
+.code-preview .md-heading { color: var(--md-heading); font-weight: 650; }
+.code-preview .md-key { color: var(--md-key); }
+.code-preview .md-string { color: var(--md-string); }
+.code-preview .md-emphasis { color: var(--md-emphasis); font-weight: 600; }
+.code-preview .md-link { color: var(--md-link); text-decoration: underline; text-underline-offset: 2px; }
+.code-preview .md-code { color: var(--md-code); }
+.code-preview .md-divider { color: var(--md-divider); }
 :root[data-theme="light"] .preview-actions { border-color: #e5e5e7; }
 :root[data-theme="light"] .button-dark { color: #fff; background: #2754ed; }
 :root[data-theme="light"] .button-dark:hover { background: #1743d8; }

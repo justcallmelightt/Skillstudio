@@ -107,6 +107,64 @@ function markdownFor(draft) {
   return markdown;
 }
 
+function previewToken(parent, className, value) {
+  const token = document.createElement('span');
+  token.className = className;
+  token.textContent = value;
+  parent.appendChild(token);
+}
+
+function previewInline(parent, value) {
+  const syntax = /(`[^`]+`|\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|\*[^*\n]+\*)/g;
+  let cursor = 0;
+  for (const match of value.matchAll(syntax)) {
+    parent.appendChild(document.createTextNode(value.slice(cursor, match.index)));
+    const token = match[0];
+    const className = token.startsWith('`') ? 'md-code'
+      : token.startsWith('[') ? 'md-link'
+        : 'md-emphasis';
+    previewToken(parent, className, token);
+    cursor = match.index + token.length;
+  }
+  parent.appendChild(document.createTextNode(value.slice(cursor)));
+}
+
+function renderMarkdownPreview(markdown) {
+  const fragment = document.createDocumentFragment();
+  let inFrontmatter = false;
+  markdown.split('\n').forEach((line, index) => {
+    if (index) fragment.appendChild(document.createTextNode('\n'));
+    const row = document.createElement('span');
+    row.className = 'md-line';
+    if ((index === 0 || index === 3) && line === '---') {
+      inFrontmatter = !inFrontmatter;
+      previewToken(row, 'md-divider', line);
+    } else if (inFrontmatter && /^(name|description):/.test(line)) {
+      const separator = line.indexOf(':') + 1;
+      previewToken(row, 'md-key', line.slice(0, separator));
+      previewToken(row, 'md-string', line.slice(separator));
+    } else {
+      const heading = line.match(/^(#{1,6})(\s+)/);
+      const list = line.match(/^(\s*)(- |\d+\. )/);
+      if (heading) {
+        previewToken(row, 'md-marker', heading[0]);
+        const title = document.createElement('span');
+        title.className = 'md-heading';
+        previewInline(title, line.slice(heading[0].length));
+        row.appendChild(title);
+      } else if (list) {
+        row.appendChild(document.createTextNode(list[1]));
+        previewToken(row, 'md-marker', list[2]);
+        previewInline(row, line.slice(list[0].length));
+      } else {
+        previewInline(row, line);
+      }
+    }
+    fragment.appendChild(row);
+  });
+  preview.replaceChildren(fragment);
+}
+
 function announce(message) {
   toast.textContent = message;
   toast.classList.add('is-visible');
@@ -141,7 +199,7 @@ function render() {
   });
   document.querySelectorAll('[data-guide-name]').forEach((element) => { element.textContent = guideName; });
   resizeTextareas();
-  preview.textContent = markdownFor(draft);
+  renderMarkdownPreview(markdownFor(draft));
   filePath.textContent = draft.name && checks[0].test(draft) ? `${draft.name}/SKILL.md` : '새 Skill';
   const passed = checks.filter((check) => check.test(draft)).length;
   score.textContent = String(passed);
