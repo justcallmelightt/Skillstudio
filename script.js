@@ -9,8 +9,34 @@ const qualityList = document.querySelector('#quality-list');
 const toast = document.querySelector('#toast');
 const themeToggle = document.querySelector('#theme-toggle');
 const guideTabs = [...document.querySelectorAll('[data-guide-tab]')];
+const fieldInfoButtons = [...document.querySelectorAll('[data-field-info]')];
 const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
 let toastTimer;
+
+function closeFieldInfo(except) {
+  fieldInfoButtons.forEach((button) => {
+    if (button === except) return;
+    button.setAttribute('aria-expanded', 'false');
+    document.getElementById(button.getAttribute('aria-controls')).hidden = true;
+  });
+}
+
+fieldInfoButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const opening = button.getAttribute('aria-expanded') !== 'true';
+    closeFieldInfo();
+    if (opening) {
+      button.setAttribute('aria-expanded', 'true');
+      document.getElementById(button.getAttribute('aria-controls')).hidden = false;
+    }
+  });
+});
+document.addEventListener('pointerdown', (event) => {
+  if (!event.target.closest('.field-heading')) closeFieldInfo();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') closeFieldInfo();
+});
 
 function syncThemeControl() {
   const isDark = document.documentElement.dataset.theme === 'dark';

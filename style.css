@@ -48,7 +48,7 @@ textarea,
 .form-section:last-child { border-bottom: 0; }
 .form-section h3 { display: flex; align-items: baseline; gap: 9px; margin: 0 0 27px; font-size: 14px; font-weight: 700; letter-spacing: -.025em; line-height: 1.4; }
 .form-section .field-number { margin: 0; }
-.form-section h3 + label { margin-top: 0; }
+.form-section h3 + .field-heading { margin-top: 0; }
 
 @media (max-width: 620px) {
   .editor-intro { padding: 25px 0 26px; }
@@ -65,9 +65,9 @@ textarea,
 .theme-glyph { width: 17px; height: 17px; border: 1.5px solid currentColor; border-radius: 50%; background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
 @media (max-width: 620px) { .topbar-right { gap: 9px; } .theme-toggle { width: 35px; height: 35px; } }
 
-/* Quiet monochrome dark mode. Light mode keeps its original palette. */
+/* Quiet dark mode with a subtle blue depth behind the workspace. */
 :root, .panel, .template-row, .builder-footer, .file-tabs, .file-tab, .code-preview, .help-card, input, textarea { transition: background-color .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease; }
-:root[data-theme="dark"] { color-scheme: dark; color: #f5f5f7; background: #000; }
+:root[data-theme="dark"] { color-scheme: dark; color: #f5f5f7; background-color: #000; background-image: radial-gradient(ellipse 125vw 120vh at 100% 100%, rgba(26, 53, 112, .62) 0%, rgba(19, 42, 92, .38) 30%, rgba(11, 27, 65, .18) 57%, rgba(5, 14, 38, .05) 78%, transparent 100%); background-attachment: fixed; }
 :root[data-theme="dark"] .topbar,
 :root[data-theme="dark"] .site-footer { border-color: #242424; }
 :root[data-theme="dark"] .brand-mark { color: #000; background: #f5f5f7; }
@@ -191,8 +191,8 @@ textarea,
 :root[data-theme="light"] .file-path,
 :root[data-theme="light"] .quality-note { color: #8e8e93; }
 :root[data-theme="light"] .code-preview { color: #333337; background: #fff; }
-:root[data-theme="light"] .code-preview { --md-marker: #357b96; --md-heading: #275f7d; --md-key: #a45c76; --md-string: #86643e; --md-emphasis: #996d22; --md-link: #337985; --md-code: #89589a; --md-divider: #9496a0; }
-:root[data-theme="dark"] .code-preview { --md-marker: #83b6ca; --md-heading: #9bc8d7; --md-key: #c79ab9; --md-string: #c9a88b; --md-emphasis: #e2b964; --md-link: #83bdc6; --md-code: #c4a3d2; --md-divider: #85868e; }
+:root[data-theme="light"] .code-preview { --md-marker: #167eaf; --md-heading: #12678d; --md-key: #ae4878; --md-string: #955b32; --md-emphasis: #9a6400; --md-link: #087d8e; --md-code: #8945a8; --md-divider: #6c6f79; }
+:root[data-theme="dark"] .code-preview { --md-marker: #68bde0; --md-heading: #83cbe9; --md-key: #e084b8; --md-string: #e0ad7b; --md-emphasis: #f0c45c; --md-link: #64c8d2; --md-code: #d29be9; --md-divider: #92949d; }
 .code-preview .md-marker { color: var(--md-marker); }
 .code-preview .md-heading { color: var(--md-heading); font-weight: 650; }
 .code-preview .md-key { color: var(--md-key); }
@@ -278,6 +278,18 @@ textarea,
 .builder textarea[rows="3"] { min-height: 112px; }
 .builder textarea[rows="4"] { min-height: 138px; }
 .builder label { margin-bottom: 10px; font-size: 13px; }
+.field-heading { position: relative; display: flex; align-items: center; gap: 5px; width: fit-content; max-width: 100%; margin-top: 20px; margin-bottom: 10px; }
+.field-heading label { margin: 0; }
+.field-heading .field-info { position: relative; flex: none; display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #777983; font-size: 10px; font-weight: 700; font-style: normal; line-height: 1; transition: color .15s ease, transform .15s ease; }
+.field-heading .field-info::before { content: ''; position: absolute; inset: 5px; border: 1px solid currentColor; border-radius: 50%; pointer-events: none; }
+.field-info:hover, .field-info[aria-expanded="true"] { color: #2754ed; }
+.field-info:active { transform: scale(.9); }
+.field-info:focus-visible { outline: 2px solid #2754ed; outline-offset: 2px; }
+.field-heading .field-help { position: absolute; top: calc(100% + 7px); left: 0; z-index: 5; width: max-content; max-width: min(320px, calc(100vw - 64px)); margin: 0; padding: 11px 13px; border: 1px solid #d8d8dc; border-radius: 9px; background: #fff; color: #3a3a40; box-shadow: 0 12px 32px rgba(16, 25, 48, .14); font-size: 12px; line-height: 1.55; word-break: keep-all; }
+.field-heading .field-help[hidden] { display: none; }
+:root[data-theme="dark"] .field-heading .field-info { color: #a1a1a6; }
+:root[data-theme="dark"] .field-heading .field-info:hover, :root[data-theme="dark"] .field-heading .field-info[aria-expanded="true"] { color: #a9c5ff; }
+:root[data-theme="dark"] .field-heading .field-help { border-color: #3a3a3d; background: #222225; color: #e5e5e7; box-shadow: 0 12px 32px rgba(0, 0, 0, .34); }
 
 /* A short companion guide, separate from the working editor. */
 .intro-guide-link { flex: none; align-self: center; color: #2754ed; font-size: 12px; font-weight: 650; transition: opacity .15s ease, transform .15s ease; }
@@ -295,6 +307,11 @@ textarea,
 .about-example span { color: #6e6e73; font-size: 11px; font-weight: 650; }
 .about-example p { margin: 15px 0 14px; color: #1d1d1f; font-size: 17px; line-height: 1.5; font-weight: 590; letter-spacing: -.025em; }
 .about-example small { color: #74747a; font-size: 11px; line-height: 1.6; }
+.about-benefits { margin-top: 74px; }
+.about-benefit-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 28px; }
+.about-benefit-list h3 { margin: 0; font-size: 15px; line-height: 1.35; letter-spacing: -.025em; }
+.about-benefit-list p { margin: 10px 0 0; color: #626268; font-size: 13px; line-height: 1.75; word-break: keep-all; }
+.about-benefits-note { margin: 22px 0 0; color: #6e6e73; font-size: 12px; line-height: 1.65; word-break: keep-all; }
 .about-steps { margin-top: 70px; }
 .about-step-list { display: grid; gap: 0; margin-top: 23px; border-top: 1px solid #d8d8dc; }
 .about-step { display: grid; grid-template-columns: 110px 1fr; gap: 16px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid #d8d8dc; }
@@ -316,14 +333,17 @@ textarea,
 :root[data-theme="dark"] .intro-guide-link, :root[data-theme="dark"] .about-sources a:hover { color: #f5f5f7; }
 :root[data-theme="dark"] .about-overline, :root[data-theme="dark"] .about-sources, :root[data-theme="dark"] .about-caveat { color: #a1a1a6; }
 :root[data-theme="dark"] .about-lead, :root[data-theme="dark"] .about-definition p, :root[data-theme="dark"] .about-next p, :root[data-theme="dark"] .about-step p { color: #b7b7bd; }
+:root[data-theme="dark"] .about-benefit-list p { color: #b7b7bd; }
+:root[data-theme="dark"] .about-benefits-note { color: #a1a1a6; }
 :root[data-theme="dark"] .about-definition, :root[data-theme="dark"] .about-step-list, :root[data-theme="dark"] .about-step, :root[data-theme="dark"] .about-next { border-color: #303033; }
 :root[data-theme="dark"] .about-example { background: #171719; box-shadow: none; }
 :root[data-theme="dark"] .about-example span, :root[data-theme="dark"] .about-example small { color: #a1a1a6; }
 :root[data-theme="dark"] .about-example p { color: #f5f5f7; }
-@media (max-width: 720px) { .about-main { padding: 42px 0 70px; } .about-definition { grid-template-columns: 1fr; gap: 22px; margin-top: 50px; } .about-steps { margin-top: 52px; } .about-next { align-items: flex-start; flex-direction: column; margin-top: 58px; } }
+@media (max-width: 720px) { .about-main { padding: 42px 0 70px; } .about-definition { grid-template-columns: 1fr; gap: 22px; margin-top: 50px; } .about-benefits { margin-top: 54px; } .about-benefit-list { grid-template-columns: 1fr; gap: 21px; margin-top: 23px; } .about-steps { margin-top: 52px; } .about-next { align-items: flex-start; flex-direction: column; margin-top: 58px; } }
 @media (max-width: 620px) { .editor-intro-row { align-items: flex-start; flex-direction: column; gap: 13px; } .intro-guide-link { align-self: flex-start; } .about-main h2 { font-size: 20px; } .about-lead { margin-top: 18px; } .about-step { grid-template-columns: 72px 1fr; gap: 10px; } .about-top-action { min-height: 35px; padding: 0 12px; font-size: 11px; } }
 @media (prefers-reduced-motion: reduce) { .intro-guide-link { transition: opacity .15s ease; } }
 .builder .field-help { margin-top: 9px; font-size: 12px; }
+.builder .field-heading .field-help { margin: 0; }
 :root[data-theme="light"] .builder input:hover,
 :root[data-theme="light"] .builder textarea:hover { border-color: #b7b7bd; }
 :root[data-theme="light"] .builder input:focus,
