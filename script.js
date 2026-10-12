@@ -3,7 +3,8 @@ const FIELD_NAMES = ['name', 'description', 'trigger', 'steps', 'rules', 'avoid'
 const form = document.querySelector('#skill-form');
 const preview = document.querySelector('#markdown-preview');
 const filePath = document.querySelector('#file-path');
-const score = document.querySelector('#quality-score');
+const scoreWheel = document.querySelector('.score-wheel');
+const scoreAnnouncement = document.querySelector('#quality-score-announcement');
 const progress = document.querySelector('#quality-progress');
 const qualityList = document.querySelector('#quality-list');
 const toast = document.querySelector('#toast');
@@ -22,6 +23,18 @@ function closeFieldInfo(except) {
 }
 
 fieldInfoButtons.forEach((button) => {
+  const help = document.getElementById(button.getAttribute('aria-controls'));
+  button.addEventListener('pointerenter', (event) => {
+    if (event.pointerType === 'touch') return;
+    closeFieldInfo(button);
+    button.setAttribute('aria-expanded', 'true');
+    help.hidden = false;
+  });
+  button.addEventListener('pointerleave', () => {
+    if (button.matches(':focus-visible')) return;
+    button.setAttribute('aria-expanded', 'false');
+    help.hidden = true;
+  });
   button.addEventListener('click', () => {
     const opening = button.getAttribute('aria-expanded') !== 'true';
     closeFieldInfo();
@@ -94,13 +107,28 @@ const templates = {
 };
 
 const checks = [
-  { label: '올바른 이름', test: (d) => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(d.name) && d.name.length < 64 },
-  { label: '역할 설명', test: (d) => d.description.length >= 20 },
-  { label: '사용 시점', test: (d) => d.trigger.length >= 10 },
-  { label: '작업 단계', test: (d) => lines(d.steps).length >= 2 },
-  { label: '구체적 기준', test: (d) => lines(d.rules).length >= 1 },
-  { label: '완료 확인', test: (d) => lines(d.checks).length >= 1 }
+  { label: '올바른 이름', field: 'name', hint: '영문 소문자·숫자·하이픈만 사용하고, 64자 미만으로 적어주세요.', test: (d) => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(d.name) && d.name.length < 64 },
+  { label: '역할 설명', field: 'description', hint: '어떤 일을 하는지 20자 이상 적어주세요.', test: (d) => d.description.length >= 20 },
+  { label: '사용 시점', field: 'trigger', hint: '언제 사용할지 10자 이상 적어주세요.', test: (d) => d.trigger.length >= 10 },
+  { label: '작업 단계', field: 'steps', hint: '작업 단계를 줄바꿈으로 2개 이상 적어주세요.', test: (d) => lines(d.steps).length >= 2 },
+  { label: '구체적 기준', field: 'rules', hint: '지켜야 할 기준을 1개 이상 적어주세요.', test: (d) => lines(d.rules).length >= 1 },
+  { label: '완료 확인', field: 'checks', hint: '완료 전 확인할 항목을 1개 이상 적어주세요.', test: (d) => lines(d.checks).length >= 1 }
 ];
+
+const checkHints = new Map(checks.map((check) => {
+  const field = form.elements[check.field];
+  const hint = document.createElement('p');
+  hint.className = 'validation-hint';
+  hint.id = `${field.id}-validation`;
+  hint.hidden = true;
+  field.insertAdjacentElement('afterend', hint);
+  return [check.field, hint];
+}));
+
+function rollScore(next) {
+  scoreAnnouncement.textContent = `${next} / ${checks.length}`;
+  scoreWheel.style.transform = `translateY(-${next * 27}px)`;
+}
 
 function lines(value) {
   return value.split('\n').map((line) => line.trim()).filter(Boolean);
@@ -159,43 +187,57 @@ function renderMarkdownPreview(markdown) {
   const fragment = document.createDocumentFragment();
   let inFrontmatter = false;
   markdown.split('\n').forEach((line, index) => {
-    if (index) fragment.appendChild(document.createTextNode('\n'));
     const row = document.createElement('span');
     row.className = 'md-line';
+    const lineNumber = document.createElement('span');
+    lineNumber.className = 'md-line-number';
+    lineNumber.setAttribute('aria-hidden', 'true');
+    lineNumber.textContent = String(index + 1);
+    row.appendChild(lineNumber);
+    const content = document.createElement('span');
+    content.className = 'md-line-content';
     if ((index === 0 || index === 3) && line === '---') {
       inFrontmatter = !inFrontmatter;
-      previewToken(row, 'md-divider', line);
+      previewToken(content, 'md-divider', line);
     } else if (inFrontmatter && /^(name|description):/.test(line)) {
       const separator = line.indexOf(':') + 1;
-      previewToken(row, 'md-key', line.slice(0, separator));
-      previewToken(row, 'md-string', line.slice(separator));
+      previewToken(content, 'md-key', line.slice(0, separator));
+      previewToken(content, 'md-string', line.slice(separator));
     } else {
       const heading = line.match(/^(#{1,6})(\s+)/);
       const list = line.match(/^(\s*)(- |\d+\. )/);
       if (heading) {
-        previewToken(row, 'md-marker', heading[0]);
+        previewToken(content, 'md-marker', heading[0]);
         const title = document.createElement('span');
         title.className = 'md-heading';
         previewInline(title, line.slice(heading[0].length));
-        row.appendChild(title);
+        content.appendChild(title);
       } else if (list) {
-        row.appendChild(document.createTextNode(list[1]));
-        previewToken(row, 'md-marker', list[2]);
-        previewInline(row, line.slice(list[0].length));
+        content.appendChild(document.createTextNode(list[1]));
+        previewToken(content, 'md-marker', list[2]);
+        previewInline(content, line.slice(list[0].length));
       } else {
-        previewInline(row, line);
+        previewInline(content, line);
       }
     }
+    row.appendChild(content);
     fragment.appendChild(row);
   });
   preview.replaceChildren(fragment);
 }
 
-function announce(message) {
+function announce(message, undoAction) {
   toast.textContent = message;
+  if (undoAction) {
+    const undoButton = document.createElement('button');
+    undoButton.type = 'button';
+    undoButton.textContent = '되돌아가기';
+    undoButton.addEventListener('click', undoAction);
+    toast.appendChild(undoButton);
+  }
   toast.classList.add('is-visible');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 2600);
+  toastTimer = setTimeout(() => toast.classList.remove('is-visible'), undoAction ? 10000 : 2600);
 }
 
 function saveDraft(draft) {
@@ -228,12 +270,22 @@ function render() {
   renderMarkdownPreview(markdownFor(draft));
   filePath.textContent = draft.name && checks[0].test(draft) ? `${draft.name}/SKILL.md` : '새 Skill';
   const passed = checks.filter((check) => check.test(draft)).length;
-  score.textContent = String(passed);
+  rollScore(passed);
   progress.style.width = `${(passed / checks.length) * 100}%`;
   qualityList.replaceChildren(...checks.map((check) => {
     const item = document.createElement('li');
+    const valid = check.test(draft);
     item.textContent = check.label;
-    if (check.test(draft)) item.classList.add('is-complete');
+    if (valid) item.classList.add('is-complete');
+    else if (draft[check.field]) item.title = check.hint;
+    const field = form.elements[check.field];
+    const hint = checkHints.get(check.field);
+    const invalid = Boolean(draft[check.field]) && !valid;
+    hint.hidden = !invalid;
+    hint.textContent = invalid ? check.hint : '';
+    field.setAttribute('aria-invalid', String(invalid));
+    if (invalid) field.setAttribute('aria-describedby', hint.id);
+    else field.removeAttribute('aria-describedby');
     return item;
   }));
   saveDraft(draft);
@@ -261,7 +313,11 @@ guideTabs.forEach((tab, index) => {
 });
 
 function loadDraft(draft) {
-  FIELD_NAMES.forEach((name) => { form.elements[name].value = draft[name] || ''; });
+  FIELD_NAMES.forEach((name) => {
+    const field = form.elements[name];
+    const value = draft && typeof draft[name] === 'string' ? draft[name] : '';
+    field.value = field.maxLength > 0 ? value.slice(0, field.maxLength) : value;
+  });
   render();
 }
 
@@ -291,13 +347,20 @@ document.querySelectorAll('[data-template]').forEach((button) => {
   button.addEventListener('click', () => {
     const id = button.dataset.template;
     if (id !== 'blank' && FIELD_NAMES.some((name) => form.elements[name].value.trim()) && !window.confirm('현재 작성한 내용을 템플릿으로 바꿀까요?')) return;
+    const previousDraft = Object.fromEntries(FIELD_NAMES.map((name) => [name, form.elements[name].value]));
+    const previousTemplate = document.querySelector('[data-template][aria-pressed="true"]')?.dataset.template || 'blank';
     loadDraft(templates[id]);
     selectTemplate(id);
-    announce(id === 'blank' ? '빈 문서로 시작합니다.' : '템플릿을 불러왔습니다. 내 방식에 맞게 고쳐보세요.');
+    announce(id === 'blank' ? '빈 문서로 시작합니다.' : '템플릿을 불러왔습니다.', () => {
+      loadDraft(previousDraft);
+      selectTemplate(previousTemplate);
+      announce('이전 내용으로 되돌렸어요.');
+    });
   });
 });
 
 form.addEventListener('input', () => {
+  toast.classList.remove('is-visible');
   selectTemplate('blank');
   render();
 });
