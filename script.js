@@ -13,6 +13,7 @@ const guideTabs = [...document.querySelectorAll('[data-guide-tab]')];
 const fieldInfoButtons = [...document.querySelectorAll('[data-field-info]')];
 const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
 let toastTimer;
+let previewMotionTimer;
 
 function closeFieldInfo(except) {
   fieldInfoButtons.forEach((button) => {
@@ -268,6 +269,16 @@ function render() {
   document.querySelectorAll('[data-guide-name]').forEach((element) => { element.textContent = guideName; });
   resizeTextareas();
   renderMarkdownPreview(markdownFor(draft));
+  const previewSurface = preview.closest('.code-preview');
+  if (previewSurface && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    clearTimeout(previewMotionTimer);
+    previewSurface.classList.remove('is-updating');
+    previewMotionTimer = setTimeout(() => {
+      previewSurface.classList.remove('is-updating');
+      void previewSurface.offsetWidth;
+      previewSurface.classList.add('is-updating');
+    }, 120);
+  }
   filePath.textContent = draft.name && checks[0].test(draft) ? `${draft.name}/SKILL.md` : '새 Skill';
   const passed = checks.filter((check) => check.test(draft)).length;
   rollScore(passed);
