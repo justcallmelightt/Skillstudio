@@ -39,8 +39,9 @@ textarea,
 
 /* Builder page */
 .editor-intro { padding: 35px 0 32px; }
-.editor-intro-row { display: flex; align-items: end; justify-content: space-between; gap: 20px; }
-.editor-intro h1 { margin: 0 0 7px; font-size: clamp(31px, 3vw, 43px); line-height: 1.13; letter-spacing: -.06em; font-weight: 650; }
+.editor-intro-row { max-width: 860px; }
+.editor-title-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 16px; margin-bottom: 7px; }
+.editor-intro h1 { margin: 0; font-size: clamp(31px, 3vw, 43px); line-height: 1.13; letter-spacing: -.06em; font-weight: 650; }
 .editor-intro p { margin: 0; color: #758176; font-size: 13px; }
 .editor-intro .editor-intro-definition { margin-bottom: 4px; font-weight: 600; }
 .editor-intro code { font-family: inherit; font-weight: 700; }
@@ -409,7 +410,7 @@ textarea,
 @media (max-width: 720px) { .about-main { padding: 42px 0 70px; } .about-definition { grid-template-columns: 1fr; gap: 22px; margin-top: 50px; } .about-benefits { margin-top: 54px; } .about-steps { margin-top: 52px; } .about-next { align-items: flex-start; flex-direction: column; margin-top: 58px; } }
 @media (max-width: 520px) { .about-chat-intro { align-items: flex-start; flex-direction: column; gap: 9px; } .about-ai-tabs { padding-inline: 10px; } .about-ai-tab { padding-inline: 10px; } .about-ai-conversation { min-height: 315px; padding-inline: 17px; } .about-ai-user { max-width: 95%; } .about-ai-user-before { max-width: 100%; } }
 @media (prefers-reduced-motion: reduce) { .about-ai-pixels i, .about-ai-loading > span:last-child { animation: none; } .about-ai-answer { animation: about-ai-fade .15s both ease-out; } .about-motion-ready .page-reveal:not(.is-revealed), .about-ai-window.chat-motion-ready .chat-reveal:not(.is-revealed) { opacity: 1; } .about-motion-ready .page-reveal, .about-motion-ready .page-reveal:not(.is-revealed) { transition: opacity .15s ease-out; transform: none; } .about-ai-window.chat-motion-ready .about-ai-user.chat-reveal, .about-ai-window.chat-motion-ready .about-ai-response.chat-reveal, .about-ai-window.chat-motion-ready .about-ai-user.chat-reveal:not(.is-revealed), .about-ai-window.chat-motion-ready .about-ai-response.chat-reveal:not(.is-revealed) { transition: opacity .15s ease-out; transform: none; } .about-ai-window.chat-motion-ready .about-ai-response.chat-reveal .about-ai-response-mark, .about-ai-window.chat-motion-ready .about-ai-response.chat-reveal:not(.is-revealed) .about-ai-response-mark { transition: none; transform: none; } @keyframes about-ai-fade { from { opacity: 0; } to { opacity: 1; } } }
-@media (max-width: 620px) { .editor-intro-row { align-items: flex-start; flex-direction: column; gap: 13px; } .intro-guide-link { align-self: flex-start; } .about-main h2 { font-size: 20px; } .about-lead { margin-top: 18px; } .about-step { grid-template-columns: 72px 1fr; gap: 10px; } .about-top-action { min-height: 35px; padding: 0 12px; font-size: 11px; } }
+@media (max-width: 620px) { .editor-title-row { gap: 8px 10px; } .editor-title-row .intro-guide-link { min-height: 34px; padding: 0 10px; font-size: 12px; } .about-main h2 { font-size: 20px; } .about-lead { margin-top: 18px; } .about-step { grid-template-columns: 72px 1fr; gap: 10px; } .about-top-action { min-height: 35px; padding: 0 12px; font-size: 11px; } }
 @media (prefers-reduced-motion: reduce) { .intro-guide-link { transition: opacity .15s ease; } }
 .builder .field-help { margin-top: 9px; font-size: 12px; }
 .builder .field-heading .field-help { margin: 0; }
