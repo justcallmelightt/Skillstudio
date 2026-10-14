@@ -279,7 +279,7 @@ function render() {
       previewSurface.classList.add('is-updating');
     }, 120);
   }
-  filePath.textContent = draft.name && checks[0].test(draft) ? `${draft.name}/SKILL.md` : '새 Skill';
+  filePath.textContent = `${guideName}/SKILL.md`;
   const passed = checks.filter((check) => check.test(draft)).length;
   rollScore(passed);
   progress.style.width = `${(passed / checks.length) * 100}%`;
