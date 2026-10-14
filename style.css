@@ -299,7 +299,7 @@ textarea,
 :root[data-theme="dark"] .field-heading .field-help { border-color: #3a3a3d; background: #222225; color: #e5e5e7; box-shadow: 0 12px 32px rgba(0, 0, 0, .34); }
 
 /* A short companion guide, separate from the working editor. */
-.intro-guide-link { display: inline-flex; align-items: center; justify-content: center; gap: 5px; flex: none; align-self: center; min-height: 38px; padding: 0 2px; color: #68686e; font-size: 12px; font-weight: 600; text-decoration: underline; text-decoration-color: #b7b7bd; text-underline-offset: 4px; transition: color .15s ease, transform .15s ease; }
+.intro-guide-link { display: inline-flex; align-items: center; justify-content: center; gap: 5px; flex: none; align-self: center; min-height: 38px; padding: 0 2px; color: #303035; font-size: 14px; font-weight: 650; text-decoration: underline; text-decoration-color: #8e8e93; text-decoration-thickness: 1px; text-underline-offset: 5px; transition: color .15s ease, transform .15s ease; }
 .intro-guide-link span { font-size: 14px; line-height: 1; }
 .intro-guide-link:hover { color: #1c1c1e; }
 .intro-guide-link:active { transform: scale(.975); }
@@ -380,7 +380,7 @@ textarea,
 .footer-lightframe img { display: block; width: 56px; height: auto; filter: brightness(0); }
 :root[data-theme="dark"] .footer-lightframe img { filter: none; }
 :root[data-theme="dark"] .about-sources a:hover { color: #f5f5f7; }
-:root[data-theme="dark"] .intro-guide-link { color: #b7b7bd; text-decoration-color: #6e6e73; }
+:root[data-theme="dark"] .intro-guide-link { color: #f5f5f7; text-decoration-color: #a1a1a6; }
 :root[data-theme="dark"] .intro-guide-link:hover { color: #f5f5f7; }
 :root[data-theme="dark"] .about-overline, :root[data-theme="dark"] .about-sources, :root[data-theme="dark"] .about-caveat { color: #a1a1a6; }
 :root[data-theme="dark"] .about-lead, :root[data-theme="dark"] .about-definition p, :root[data-theme="dark"] .about-next p, :root[data-theme="dark"] .about-step p { color: #b7b7bd; }
@@ -410,7 +410,7 @@ textarea,
 @media (max-width: 720px) { .about-main { padding: 42px 0 70px; } .about-definition { grid-template-columns: 1fr; gap: 22px; margin-top: 50px; } .about-benefits { margin-top: 54px; } .about-steps { margin-top: 52px; } .about-next { align-items: flex-start; flex-direction: column; margin-top: 58px; } }
 @media (max-width: 520px) { .about-chat-intro { align-items: flex-start; flex-direction: column; gap: 9px; } .about-ai-tabs { padding-inline: 10px; } .about-ai-tab { padding-inline: 10px; } .about-ai-conversation { min-height: 315px; padding-inline: 17px; } .about-ai-user { max-width: 95%; } .about-ai-user-before { max-width: 100%; } }
 @media (prefers-reduced-motion: reduce) { .about-ai-pixels i, .about-ai-loading > span:last-child { animation: none; } .about-ai-answer { animation: about-ai-fade .15s both ease-out; } .about-motion-ready .page-reveal:not(.is-revealed), .about-ai-window.chat-motion-ready .chat-reveal:not(.is-revealed) { opacity: 1; } .about-motion-ready .page-reveal, .about-motion-ready .page-reveal:not(.is-revealed) { transition: opacity .15s ease-out; transform: none; } .about-ai-window.chat-motion-ready .about-ai-user.chat-reveal, .about-ai-window.chat-motion-ready .about-ai-response.chat-reveal, .about-ai-window.chat-motion-ready .about-ai-user.chat-reveal:not(.is-revealed), .about-ai-window.chat-motion-ready .about-ai-response.chat-reveal:not(.is-revealed) { transition: opacity .15s ease-out; transform: none; } .about-ai-window.chat-motion-ready .about-ai-response.chat-reveal .about-ai-response-mark, .about-ai-window.chat-motion-ready .about-ai-response.chat-reveal:not(.is-revealed) .about-ai-response-mark { transition: none; transform: none; } @keyframes about-ai-fade { from { opacity: 0; } to { opacity: 1; } } }
-@media (max-width: 620px) { .editor-title-row { gap: 8px 10px; } .editor-title-row .intro-guide-link { min-height: 34px; } .about-main h2 { font-size: 20px; } .about-lead { margin-top: 18px; } .about-step { grid-template-columns: 72px 1fr; gap: 10px; } .about-top-action { min-height: 35px; padding: 0 12px; font-size: 11px; } }
+@media (max-width: 620px) { .editor-title-row { gap: 8px 10px; } .editor-title-row .intro-guide-link { min-height: 34px; font-size: 13px; } .about-main h2 { font-size: 20px; } .about-lead { margin-top: 18px; } .about-step { grid-template-columns: 72px 1fr; gap: 10px; } .about-top-action { min-height: 35px; padding: 0 12px; font-size: 11px; } }
 @media (prefers-reduced-motion: reduce) { .intro-guide-link { transition: opacity .15s ease; } }
 .builder .field-help { margin-top: 9px; font-size: 12px; }
 .builder .field-heading .field-help { margin: 0; }
