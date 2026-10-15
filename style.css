@@ -241,6 +241,8 @@ textarea,
 
 /* Platform help is part of the work area, not a promotional card. */
 .platform-guide { padding: 23px 4px 8px; color: inherit; }
+.platform-guide.guide-motion-ready { transition: opacity 600ms ease-out, transform 700ms cubic-bezier(.18,.72,.2,1); }
+.platform-guide.guide-motion-ready:not(.is-revealed) { opacity: 0; transform: translateY(12px); }
 .guide-heading h2 { margin: 0; font-size: 17px; font-weight: 650; letter-spacing: -.035em; line-height: 1.15; }
 .guide-heading p { margin: 7px 0 18px; color: #8e8e93; font-size: 12px; line-height: 1.55; }
 .guide-tabs { display: flex; gap: 10px; border-bottom: 1px solid #d8d8dc; }
@@ -275,6 +277,7 @@ textarea,
 :root[data-theme="dark"] .guide-panel a { color: #d1d1d6; }
 @media (max-width: 450px) { .guide-tabs { gap: 6px; } .guide-tab { gap: 6px; padding-inline: 4px; } .guide-logo { width: 30px; height: 30px; } .guide-wordmark-claude { width: 148px; height: 22px; -webkit-mask-size: 160px 53px; mask-size: 160px 53px; -webkit-mask-position: -6px -16px; mask-position: -6px -16px; } }
 @media (prefers-reduced-motion: reduce) { .guide-tab { transition: color .15s ease, border-color .15s ease; } }
+@media (prefers-reduced-motion: reduce) { .platform-guide.guide-motion-ready, .platform-guide.guide-motion-ready:not(.is-revealed) { transition: opacity .15s ease-out; transform: none; } }
 
 /* Form controls keep native semantics, with a calmer and content-sized surface. */
 .builder input,

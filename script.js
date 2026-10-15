@@ -10,10 +10,23 @@ const qualityList = document.querySelector('#quality-list');
 const toast = document.querySelector('#toast');
 const themeToggle = document.querySelector('#theme-toggle');
 const guideTabs = [...document.querySelectorAll('[data-guide-tab]')];
+const platformGuide = document.querySelector('.platform-guide');
 const fieldInfoButtons = [...document.querySelectorAll('[data-field-info]')];
 const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
 let toastTimer;
 let previewMotionTimer;
+
+if (platformGuide && 'IntersectionObserver' in window) {
+  const guideObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-revealed');
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+  platformGuide.classList.add('guide-motion-ready');
+  guideObserver.observe(platformGuide);
+}
 
 function closeFieldInfo(except) {
   fieldInfoButtons.forEach((button) => {
