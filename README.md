@@ -14,7 +14,7 @@ python3 -m http.server 8765
 
 그다음 `http://127.0.0.1:8765/`에 접속합니다.
 
-공개 페이지가 준비되면 이 문서에 접속 주소를 추가합니다.
+공개 페이지: https://justcallmelightt.github.io/Skillstudio/
 
 ## 사용
 
