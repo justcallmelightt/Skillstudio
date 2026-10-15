@@ -1,12 +1,13 @@
 const themeToggle = document.querySelector('#theme-toggle');
+const tr = window.studioText;
 const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
 
 function syncThemeControl() {
   const isDark = document.documentElement.dataset.theme === 'dark';
-  const nextTheme = isDark ? '라이트' : '다크';
+  const nextTheme = isDark ? tr('라이트', 'light') : tr('다크', 'dark');
   document.querySelector('meta[name="theme-color"]').content = isDark ? '#000000' : '#fafcff';
-  themeToggle.setAttribute('aria-label', `${nextTheme} 모드로 전환`);
-  themeToggle.title = `${nextTheme} 모드로 전환`;
+  themeToggle.setAttribute('aria-label', tr(`${nextTheme} 모드로 전환`, `Switch to ${nextTheme} mode`));
+  themeToggle.title = tr(`${nextTheme} 모드로 전환`, `Switch to ${nextTheme} mode`);
 }
 
 syncThemeControl();

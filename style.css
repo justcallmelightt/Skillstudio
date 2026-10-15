@@ -241,6 +241,12 @@ textarea,
 
 /* Platform help is part of the work area, not a promotional card. */
 .platform-guide { padding: 23px 4px 8px; color: inherit; }
+.language-link { flex: none; padding: 8px 2px; color: #6e6e73; font-size: 12px; font-weight: 650; text-decoration: underline; text-underline-offset: 4px; transition: color .15s ease, opacity .15s ease; }
+.language-link:hover { color: #1d1d1f; }
+.language-link:active { opacity: .65; }
+:root[data-theme="dark"] .language-link { color: #a1a1a6; }
+:root[data-theme="dark"] .language-link:hover { color: #fff; }
+@media (max-width: 620px) { .topbar-right { gap: 12px; } .language-link { font-size: 11px; } }
 .platform-guide.guide-motion-ready { transition: opacity 600ms ease-out, transform 700ms cubic-bezier(.18,.72,.2,1); }
 .platform-guide.guide-motion-ready:not(.is-revealed) { opacity: 0; transform: translateY(12px); }
 .guide-heading h2 { margin: 0; font-size: 17px; font-weight: 650; letter-spacing: -.035em; line-height: 1.15; }

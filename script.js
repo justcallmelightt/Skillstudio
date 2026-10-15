@@ -1,4 +1,5 @@
 const STORAGE_KEY = 'skill-studio-draft-v1';
+const tr = window.studioText;
 const FIELD_NAMES = ['name', 'description', 'trigger', 'steps', 'rules', 'avoid', 'output', 'checks'];
 const form = document.querySelector('#skill-form');
 const preview = document.querySelector('#markdown-preview');
@@ -67,10 +68,10 @@ document.addEventListener('keydown', (event) => {
 
 function syncThemeControl() {
   const isDark = document.documentElement.dataset.theme === 'dark';
-  const nextTheme = isDark ? '라이트' : '다크';
+  const nextTheme = isDark ? tr('라이트', 'light') : tr('다크', 'dark');
   document.querySelector('meta[name="theme-color"]').content = isDark ? '#000000' : '#fafcff';
-  themeToggle.setAttribute('aria-label', `${nextTheme} 모드로 전환`);
-  themeToggle.title = `${nextTheme} 모드로 전환`;
+  themeToggle.setAttribute('aria-label', tr(`${nextTheme} 모드로 전환`, `Switch to ${nextTheme} mode`));
+  themeToggle.title = tr(`${nextTheme} 모드로 전환`, `Switch to ${nextTheme} mode`);
 }
 
 syncThemeControl();
@@ -120,13 +121,46 @@ const templates = {
   }
 };
 
+if (window.studioEnglish) Object.assign(templates, {
+  design: {
+    name: 'thoughtful-ui-design',
+    description: 'Improve the design and usability of a web screen by inspecting its structure and refining it into a clear, intentional interface.',
+    trigger: 'Use when creating a new screen or improving the visual quality of an existing web UI.',
+    steps: 'Identify the screen’s purpose and main users\nReview the information hierarchy and layout\nSet color and typography rules\nImplement the core screen and check mobile',
+    rules: 'Give each screen a clear visual focus\nProvide immediate press feedback for every button\nKeep text and background contrast readable',
+    avoid: 'Do not change brand copy without a reason\nDo not add decorative motion without purpose',
+    output: 'Explain the updated screen, key design decisions, and responsive behavior checked.',
+    checks: 'Is the text and are the buttons clear on mobile?\nCan users access key functions with a keyboard?\nIs content visible with reduced motion?'
+  },
+  review: {
+    name: 'focused-code-review',
+    description: 'Review actual behavior and regression risks in code changes, reporting only reproducible problems.',
+    trigger: 'Use when a user requests a review of a code change or pull request.',
+    steps: 'Understand the change and affected files\nCompare call paths with previous behavior\nReproduce issues or confirm evidence\nReport findings by severity',
+    rules: 'Give the location and conditions for each issue\nDo not present unverified guesses as findings',
+    avoid: 'Do not call a style preference a defect',
+    output: 'Report findings, severity, reproduction conditions, and remaining verification limits.',
+    checks: 'Does each finding have code evidence?\nDoes it affect real user behavior?'
+  },
+  writing: {
+    name: 'clear-english-writing',
+    description: 'Write and refine natural, easy-to-read English with the purpose and audience in mind.',
+    trigger: 'Use when asked to draft or edit help text, introductions, or product copy.',
+    steps: 'Identify the purpose and audience\nSummarize the main message in one sentence\nWrite short paragraphs\nRead aloud and fix awkward phrasing',
+    rules: 'Keep one idea per paragraph\nPreserve user-provided names and numbers',
+    avoid: 'Do not invent facts or overpromise\nDo not repeat unnecessary jargon',
+    output: 'Provide ready-to-use copy and brief alternatives only when helpful.',
+    checks: 'Is the purpose clear in the first sentence?\nIs the wording natural and correct?'
+  }
+});
+
 const checks = [
-  { label: '올바른 이름', field: 'name', hint: '영문 소문자·숫자·하이픈만 사용하고, 64자 미만으로 적어주세요.', test: (d) => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(d.name) && d.name.length < 64 },
-  { label: '역할 설명', field: 'description', hint: '어떤 일을 하는지 20자 이상 적어주세요.', test: (d) => d.description.length >= 20 },
-  { label: '사용 시점', field: 'trigger', hint: '언제 사용할지 10자 이상 적어주세요.', test: (d) => d.trigger.length >= 10 },
-  { label: '작업 단계', field: 'steps', hint: '작업 단계를 줄바꿈으로 2개 이상 적어주세요.', test: (d) => lines(d.steps).length >= 2 },
-  { label: '구체적 기준', field: 'rules', hint: '지켜야 할 기준을 1개 이상 적어주세요.', test: (d) => lines(d.rules).length >= 1 },
-  { label: '완료 확인', field: 'checks', hint: '완료 전 확인할 항목을 1개 이상 적어주세요.', test: (d) => lines(d.checks).length >= 1 }
+  { label: tr('올바른 이름', 'Valid name'), field: 'name', hint: tr('영문 소문자·숫자·하이픈만 사용하고, 64자 미만으로 적어주세요.', 'Use lowercase letters, numbers, and hyphens; keep it under 64 characters.'), test: (d) => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(d.name) && d.name.length < 64 },
+  { label: tr('역할 설명', 'Purpose'), field: 'description', hint: tr('어떤 일을 하는지 20자 이상 적어주세요.', 'Describe what it does in at least 20 characters.'), test: (d) => d.description.length >= 20 },
+  { label: tr('사용 시점', 'When to use'), field: 'trigger', hint: tr('언제 사용할지 10자 이상 적어주세요.', 'Describe when to use it in at least 10 characters.'), test: (d) => d.trigger.length >= 10 },
+  { label: tr('작업 단계', 'Steps'), field: 'steps', hint: tr('작업 단계를 줄바꿈으로 2개 이상 적어주세요.', 'Put at least two steps on separate lines.'), test: (d) => lines(d.steps).length >= 2 },
+  { label: tr('구체적 기준', 'Rules'), field: 'rules', hint: tr('지켜야 할 기준을 1개 이상 적어주세요.', 'Add at least one rule.'), test: (d) => lines(d.rules).length >= 1 },
+  { label: tr('완료 확인', 'Final checks'), field: 'checks', hint: tr('완료 전 확인할 항목을 1개 이상 적어주세요.', 'Add at least one final check.'), test: (d) => lines(d.checks).length >= 1 }
 ];
 
 const checkHints = new Map(checks.map((check) => {
@@ -163,15 +197,15 @@ function bulletSection(title, value) {
 
 function markdownFor(draft) {
   const name = draft.name || 'my-skill';
-  const description = draft.description || '이 Skill의 역할과 언제 사용하는지 설명하세요.';
+  const description = draft.description || tr('이 Skill의 역할과 언제 사용하는지 설명하세요.', 'Describe what this Skill does and when to use it.');
   let markdown = `---\nname: ${quoteYaml(name)}\ndescription: ${quoteYaml(description)}\n---\n\n# ${name}\n`;
-  if (draft.trigger) markdown += `\n## 사용 시점\n\n${draft.trigger}\n`;
+  if (draft.trigger) markdown += `\n## ${tr('사용 시점', 'When to use')}\n\n${draft.trigger}\n`;
   const steps = lines(draft.steps);
-  if (steps.length) markdown += `\n## 작업 방식\n\n${steps.map((item, index) => `${index + 1}. ${item}`).join('\n')}\n`;
-  markdown += bulletSection('지켜야 할 기준', draft.rules);
-  markdown += bulletSection('피해야 할 것', draft.avoid);
-  if (draft.output) markdown += `\n## 결과물\n\n${draft.output}\n`;
-  markdown += bulletSection('완료 전 확인', draft.checks);
+  if (steps.length) markdown += `\n## ${tr('작업 방식', 'Workflow')}\n\n${steps.map((item, index) => `${index + 1}. ${item}`).join('\n')}\n`;
+  markdown += bulletSection(tr('지켜야 할 기준', 'Rules'), draft.rules);
+  markdown += bulletSection(tr('피해야 할 것', 'Avoid'), draft.avoid);
+  if (draft.output) markdown += `\n## ${tr('결과물', 'Output')}\n\n${draft.output}\n`;
+  markdown += bulletSection(tr('완료 전 확인', 'Final checks'), draft.checks);
   return markdown;
 }
 
@@ -245,7 +279,7 @@ function announce(message, undoAction) {
   if (undoAction) {
     const undoButton = document.createElement('button');
     undoButton.type = 'button';
-    undoButton.textContent = '되돌아가기';
+    undoButton.textContent = tr('되돌아가기', 'Undo');
     undoButton.addEventListener('click', undoAction);
     toast.appendChild(undoButton);
   }
@@ -355,12 +389,12 @@ function selectTemplate(id) {
 
 function canExport(draft) {
   if (!checks[0].test(draft)) {
-    announce('이름은 영문 소문자·숫자·하이픈으로 작성해주세요.');
+    announce(tr('이름은 영문 소문자·숫자·하이픈으로 작성해주세요.', 'Use lowercase letters, numbers, and hyphens for the name.'));
     form.elements.name.focus();
     return false;
   }
   if (!draft.description) {
-    announce('Skill의 역할 설명을 작성해주세요.');
+    announce(tr('Skill의 역할 설명을 작성해주세요.', 'Describe what this Skill does.'));
     form.elements.description.focus();
     return false;
   }
@@ -370,15 +404,15 @@ function canExport(draft) {
 document.querySelectorAll('[data-template]').forEach((button) => {
   button.addEventListener('click', () => {
     const id = button.dataset.template;
-    if (id !== 'blank' && FIELD_NAMES.some((name) => form.elements[name].value.trim()) && !window.confirm('현재 작성한 내용을 템플릿으로 바꿀까요?')) return;
+    if (id !== 'blank' && FIELD_NAMES.some((name) => form.elements[name].value.trim()) && !window.confirm(tr('현재 작성한 내용을 템플릿으로 바꿀까요?', 'Replace your current draft with this template?'))) return;
     const previousDraft = Object.fromEntries(FIELD_NAMES.map((name) => [name, form.elements[name].value]));
     const previousTemplate = document.querySelector('[data-template][aria-pressed="true"]')?.dataset.template || 'blank';
     loadDraft(templates[id]);
     selectTemplate(id);
-    announce(id === 'blank' ? '빈 문서로 시작합니다.' : '템플릿을 불러왔습니다.', () => {
+    announce(id === 'blank' ? tr('빈 문서로 시작합니다.', 'Starting with a blank document.') : tr('템플릿을 불러왔습니다.', 'Template loaded.'), () => {
       loadDraft(previousDraft);
       selectTemplate(previousTemplate);
-      announce('이전 내용으로 되돌렸어요.');
+      announce(tr('이전 내용으로 되돌렸어요.', 'Previous draft restored.'));
     });
   });
 });
@@ -393,11 +427,11 @@ document.querySelectorAll('[data-action]').forEach((button) => {
   button.addEventListener('click', async () => {
     const draft = readDraft();
     if (button.dataset.action === 'reset') {
-      if (!FIELD_NAMES.some((name) => draft[name]) || window.confirm('작성한 내용을 모두 지우고 처음부터 시작할까요?')) {
+      if (!FIELD_NAMES.some((name) => draft[name]) || window.confirm(tr('작성한 내용을 모두 지우고 처음부터 시작할까요?', 'Clear your draft and start over?'))) {
         loadDraft({});
         selectTemplate('blank');
         form.elements.name.focus();
-        announce('새 문서가 준비됐어요.');
+        announce(tr('새 문서가 준비됐어요.', 'New document ready.'));
       }
       return;
     }
@@ -406,9 +440,9 @@ document.querySelectorAll('[data-action]').forEach((button) => {
     if (button.dataset.action === 'copy') {
       try {
         await navigator.clipboard.writeText(content);
-        announce('SKILL.md 내용을 복사했어요.');
+        announce(tr('SKILL.md 내용을 복사했어요.', 'SKILL.md copied.'));
       } catch {
-        announce('복사 권한이 없어요. 파일 다운로드를 이용해주세요.');
+        announce(tr('복사 권한이 없어요. 파일 다운로드를 이용해주세요.', 'Clipboard access is unavailable. Download the file instead.'));
       }
       return;
     }
@@ -420,7 +454,7 @@ document.querySelectorAll('[data-action]').forEach((button) => {
     link.click();
     link.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
-    announce('SKILL.md 파일을 다운로드했어요.');
+    announce(tr('SKILL.md 파일을 다운로드했어요.', 'SKILL.md downloaded.'));
   });
 });
 
