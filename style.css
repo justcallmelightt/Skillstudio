@@ -72,7 +72,10 @@ textarea,
 @media (max-width: 620px) { .topbar-right { gap: 9px; } .theme-toggle { width: 35px; height: 35px; } }
 
 /* Quiet dark mode with a subtle blue depth behind the workspace. */
-:root, .panel, .template-row, .builder-footer, .file-tabs, .file-tab, .code-preview, .help-card, input, textarea { transition: background-color .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease; }
+:root, .panel, .template-row, .builder-footer, .file-tabs, .file-tab, .code-preview, .help-card, input, textarea { transition: background-color .46s cubic-bezier(.22,1,.36,1), border-color .46s cubic-bezier(.22,1,.36,1), color .46s cubic-bezier(.22,1,.36,1), box-shadow .46s cubic-bezier(.22,1,.36,1); }
+@media (prefers-reduced-motion: reduce) {
+  :root, .panel, .template-row, .builder-footer, .file-tabs, .file-tab, .code-preview, .help-card, input, textarea { transition-duration: .15s; }
+}
 :root[data-theme="dark"] { color-scheme: dark; color: #f5f5f7; background-color: #000; background-image: radial-gradient(ellipse 125vw 120vh at 100% 100%, rgba(26, 53, 112, .62) 0%, rgba(19, 42, 92, .38) 30%, rgba(11, 27, 65, .18) 57%, rgba(5, 14, 38, .05) 78%, transparent 100%); background-attachment: fixed; }
 :root[data-theme="dark"] .topbar,
 :root[data-theme="dark"] .site-footer { border-color: #242424; }

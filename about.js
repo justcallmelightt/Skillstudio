@@ -28,7 +28,7 @@ const examplePanels = [...document.querySelectorAll('[data-example-panel]')];
 const exampleWindow = document.querySelector('.about-ai-window');
 if ('IntersectionObserver' in window) {
   const pageElements = document.querySelectorAll('.topbar > *, .about-intro > *, .about-definition > *, .about-chat-intro > *, .about-ai-tabs, .about-ai-caption, .about-benefits-note, .about-steps > h2, .about-step, .about-caveat, .about-next > *, .about-sources, .site-footer > *');
-  const messages = exampleWindow.querySelectorAll('.about-ai-user, .about-ai-response');
+  const messages = exampleWindow?.querySelectorAll('.about-ai-user, .about-ai-response') || [];
   const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
@@ -45,7 +45,7 @@ if ('IntersectionObserver' in window) {
     revealObserver.observe(message);
   });
   document.body.classList.add('about-motion-ready');
-  exampleWindow.classList.add('chat-motion-ready');
+  exampleWindow?.classList.add('chat-motion-ready');
 }
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let exampleTimer;

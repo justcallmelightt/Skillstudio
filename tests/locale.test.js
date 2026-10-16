@@ -21,6 +21,10 @@ function runLocale(search) {
     href: './about.html',
     getAttribute() { return this.href; }
   };
+  const benefitsLink = {
+    href: './benefits.html',
+    getAttribute() { return this.href; }
+  };
   const field = { placeholder: '예: thoughtful-ui-review' };
   const label = {
     value: 'Skill 이름 설명 보기',
@@ -35,7 +39,7 @@ function runLocale(search) {
     querySelectorAll(selector) {
       return ({
         '[data-language-link]': [languageLink],
-        'a[href^="./about.html"], a[href^="./index.html"]': [aboutLink],
+        'a[href^="./about.html"], a[href^="./benefits.html"], a[href^="./index.html"]': [aboutLink, benefitsLink],
         'a.brand[href="./"]': [brand],
         '[placeholder]': [field],
         '[aria-label]': [label]
@@ -60,7 +64,7 @@ function runLocale(search) {
     window: {}, document, location: { search, pathname: '/Skillstudio/' },
     NodeFilter: { SHOW_TEXT: 4 }, URLSearchParams
   });
-  return { document, nodes, languageLink, brand, aboutLink, field, label };
+  return { document, nodes, languageLink, brand, aboutLink, benefitsLink, field, label };
 }
 
 test('English translates editor copy and preserves the locale in navigation', () => {
@@ -71,6 +75,7 @@ test('English translates editor copy and preserves the locale in navigation', ()
   assert.equal(result.languageLink.textContent, '한국어');
   assert.equal(result.brand.href, './?lang=en');
   assert.equal(result.aboutLink.href, './about.html?lang=en');
+  assert.equal(result.benefitsLink.href, './benefits.html?lang=en');
   assert.equal(result.field.placeholder, 'e.g. thoughtful-ui-review');
   assert.equal(result.label.value, 'Show Skill name help');
 });

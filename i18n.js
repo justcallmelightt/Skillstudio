@@ -12,7 +12,7 @@ document.querySelectorAll('[data-language-link]').forEach((link) => {
 
 if (english) {
   document.documentElement.lang = 'en';
-  document.querySelectorAll('a[href^="./about.html"], a[href^="./index.html"]').forEach((link) => {
+  document.querySelectorAll('a[href^="./about.html"], a[href^="./benefits.html"], a[href^="./index.html"]').forEach((link) => {
     link.href = `${link.getAttribute('href')}?lang=en`;
   });
   document.querySelectorAll('a.brand[href="./"]').forEach((link) => { link.href = './?lang=en'; });
@@ -20,7 +20,14 @@ if (english) {
   const phrases = new Map(Object.entries({
     '새 Skill 만들기': 'Create a Skill',
     'Skill 만들기': 'Create a Skill',
-    'Skill을 쓰면 뭐가 좋나요?': 'Why use a Skill?',
+    'Skill 알아보기': 'Explore Skills',
+    'Skill을 쓰면 뭐가 달라질까요?': 'What changes with a Skill?',
+    '반복 설명을 줄이는 실제 예시 대화를 따로 살펴보세요.': 'See real-world examples of how a Skill reduces repeated explanations.',
+    'Skill의 장점 보기': 'See the benefits',
+    'Skill을 쓰면 뭐가 좋을까요?': 'Why use a Skill?',
+    '같은 기준을 여러 번 설명하는 대신, 이름으로 불러 다시 사용할 수 있어요.': 'Call a saved workflow by name instead of explaining the same criteria again.',
+    'Skill이 처음인가요?': 'New to Skills?',
+    'Skill의 정의와 파일 구조를 먼저 살펴보세요.': 'Start with the definition and file structure.',
     'Skill은 AI에게 매번 다시 설명하던 작업 방식을, 다음에도 꺼내 쓸 수 있도록 정리한 지침입니다.': 'A Skill saves the way you work, so you do not have to explain it to AI every time.',
     '내 작업 방식을 적으면 오른쪽에서': 'Describe your workflow and see it become',
     '로 정리됩니다.': 'on the right.',
@@ -171,8 +178,10 @@ if (english) {
     const label = element.getAttribute('aria-label');
     if (aria.has(label)) element.setAttribute('aria-label', aria.get(label));
   });
-  document.title = document.querySelector('#skill-form') ? 'Skill Studio — Create a Skill' : 'What is a Skill? — Skill Studio';
-  document.querySelector('meta[name="description"]').content = document.querySelector('#skill-form')
+  const isEditor = Boolean(document.querySelector('#skill-form'));
+  const isBenefits = Boolean(document.querySelector('.about-ai-window'));
+  document.title = isEditor ? 'Skill Studio — Create a Skill' : isBenefits ? 'Why use a Skill? — Skill Studio' : 'What is a Skill? — Skill Studio';
+  document.querySelector('meta[name="description"]').content = isEditor
     ? 'Create a reusable SKILL.md for Codex and Claude Code.'
-    : 'Learn what AI Skills are and how to create and use one.';
+    : isBenefits ? 'Compare real-world example conversations with and without a Skill.' : 'Learn what AI Skills are and how to create and use one.';
 }

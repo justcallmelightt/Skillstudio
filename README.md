@@ -6,7 +6,7 @@
 
 `index.html`을 브라우저에서 열거나, 이 폴더에서 정적 서버를 실행하세요. 첫 화면에서 바로 Skill을 만들 수 있습니다.
 
-Skill이 처음이라면 `about.html`에서 개념과 사용 순서를 읽을 수 있습니다. 편집 화면의 “Skill을 쓰면 뭐가 좋나요?” 링크로 이동할 수 있습니다.
+Skill이 처음이라면 `about.html`에서 정의와 사용 순서를, `benefits.html`에서 사용 전후 예시를 볼 수 있습니다. 편집 화면의 “Skill 알아보기” 링크에서 시작하세요.
 
 ```sh
 python3 -m http.server 8765
@@ -14,7 +14,9 @@ python3 -m http.server 8765
 
 그다음 `http://127.0.0.1:8765/`에 접속합니다.
 
-공개 페이지: https://justcallmelightt.github.io/Skillstudio/
+공개 페이지: https://skillstudio0.vercel.app/ (`skillstudio.vercel.app`은 다른 팀이 소유 중이어서 대체 주소를 사용합니다.)
+
+GitHub Pages 미러: https://justcallmelightt.github.io/Skillstudio/
 
 ## 사용
 
@@ -31,6 +33,8 @@ python3 -m http.server 8765
 
 상단의 `English`/`한국어` 링크로 화면 언어를 바꿀 수 있습니다. 영어 화면은 `?lang=en`으로 열리며, 작성 중인 초안은 언어를 바꿔도 유지됩니다. 이미 작성한 문장 자체를 자동 번역하지는 않습니다.
 
+릴리즈 노트와 주요 공개 안내는 한국어와 영어를 함께 제공합니다.
+
 ## 개인정보 보호 및 보안
 
 초안과 테마는 브라우저 `localStorage`에 저장됩니다. 서버 전송은 없으며, 복사와 `SKILL.md` 다운로드는 사용자가 직접 실행할 때만 발생합니다.
@@ -43,6 +47,8 @@ python3 -m http.server 8765
 
 Skill Studio is a static, browser-based editor for drafting `SKILL.md` files for Codex and Claude Code. It supports manual writing, live preview, completeness checks, copying, and downloading. It does not generate drafts with AI, run your Skill, or install it automatically.
 
-Open the [public site](https://justcallmelightt.github.io/Skillstudio/?lang=en) or serve this folder locally with `python3 -m http.server 8765`. Choose a blank document or template, describe the Skill, review the preview, download `SKILL.md`, and put it in a folder named after the Skill. The editor shows project and personal folder paths for each tool.
+Open the [public site](https://skillstudio0.vercel.app/?lang=en) or serve this folder locally with `python3 -m http.server 8765`. The preferred `skillstudio.vercel.app` address belongs to another Vercel team, so this release uses `skillstudio0.vercel.app`. A [GitHub Pages mirror](https://justcallmelightt.github.io/Skillstudio/?lang=en) is also available. Read [What is a Skill?](https://skillstudio0.vercel.app/about.html?lang=en) for the definition and [Why use a Skill?](https://skillstudio0.vercel.app/benefits.html?lang=en) for before-and-after examples. Choose a blank document or template, describe the Skill, review the preview, download `SKILL.md`, and put it in a folder named after the Skill. The editor shows project and personal folder paths for each tool.
 
 Use the `English`/`한국어` link to switch languages. The draft stays in the browser across language switches, but text you already wrote is not translated. Drafts and theme preferences are stored in your browser’s `localStorage`; the app does not upload drafts to a server. See [Privacy & Security](./SECURITY.md#privacy--security-english) for details.
+
+Release notes and major public announcements are published in both Korean and English.
