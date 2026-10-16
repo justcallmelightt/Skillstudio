@@ -33,7 +33,7 @@ GitHub Pages 미러: https://justcallmelightt.github.io/Skillstudio/
 
 상단의 `English`/`한국어` 링크로 화면 언어를 바꿀 수 있습니다. 영어 화면은 `?lang=en`으로 열리며, 작성 중인 초안은 언어를 바꿔도 유지됩니다. 이미 작성한 문장 자체를 자동 번역하지는 않습니다.
 
-릴리즈 노트와 주요 공개 안내는 한국어와 영어를 함께 제공합니다.
+릴리즈 노트와 주요 공개 안내는 한국어와 영어를 함께 제공합니다. 변경 사항은 [릴리즈 노트](./CHANGELOG.md)에서 확인하세요.
 
 ## 개인정보 보호 및 보안
 
@@ -51,4 +51,4 @@ Open the [public site](https://skillstudio0.vercel.app/?lang=en) or serve this f
 
 Use the `English`/`한국어` link to switch languages. The draft stays in the browser across language switches, but text you already wrote is not translated. Drafts and theme preferences are stored in your browser’s `localStorage`; the app does not upload drafts to a server. See [Privacy & Security](./SECURITY.md#privacy--security-english) for details.
 
-Release notes and major public announcements are published in both Korean and English.
+Release notes and major public announcements are published in both Korean and English. See the [release notes](./CHANGELOG.md) for changes.
