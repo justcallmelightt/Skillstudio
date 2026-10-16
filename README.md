@@ -29,10 +29,20 @@ python3 -m http.server 8765
 
 오른쪽 위의 테마 버튼으로 라이트·다크 화면을 바꿀 수 있습니다. 처음에는 기기 설정을 따르며, 직접 선택한 테마는 현재 브라우저에 저장됩니다.
 
-영문 MVP 브랜치에서는 상단의 `English`/`한국어` 링크로 화면 언어를 바꿀 수 있습니다. 영어 화면은 `?lang=en`으로 열리며, 작성 중인 초안은 언어를 바꿔도 유지됩니다. 이미 작성한 문장 자체를 자동 번역하지는 않습니다.
+상단의 `English`/`한국어` 링크로 화면 언어를 바꿀 수 있습니다. 영어 화면은 `?lang=en`으로 열리며, 작성 중인 초안은 언어를 바꿔도 유지됩니다. 이미 작성한 문장 자체를 자동 번역하지는 않습니다.
 
 ## 개인정보 보호 및 보안
 
 초안과 테마는 브라우저 `localStorage`에 저장됩니다. 서버 전송은 없으며, 복사와 `SKILL.md` 다운로드는 사용자가 직접 실행할 때만 발생합니다.
 
 자세한 내용은 [개인정보 보호 및 보안](./SECURITY.md)을 참고하세요.
+
+---
+
+## English
+
+Skill Studio is a static, browser-based editor for drafting `SKILL.md` files for Codex and Claude Code. It supports manual writing, live preview, completeness checks, copying, and downloading. It does not generate drafts with AI, run your Skill, or install it automatically.
+
+Open the [public site](https://justcallmelightt.github.io/Skillstudio/?lang=en) or serve this folder locally with `python3 -m http.server 8765`. Choose a blank document or template, describe the Skill, review the preview, download `SKILL.md`, and put it in a folder named after the Skill. The editor shows project and personal folder paths for each tool.
+
+Use the `English`/`한국어` link to switch languages. The draft stays in the browser across language switches, but text you already wrote is not translated. Drafts and theme preferences are stored in your browser’s `localStorage`; the app does not upload drafts to a server. See [Privacy & Security](./SECURITY.md#privacy--security-english) for details.

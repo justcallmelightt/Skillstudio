@@ -42,3 +42,17 @@ Skill Studio는 브라우저에서 작업 지침을 작성해 `SKILL.md` 파일�
 > 개인정보 보호와 보안은 사용자가 보지 못하더라도 절대 타협하지 않는 기반입니다.
 
 Skill Studio는 사용자의 목적을 돕기 위해 존재합니다. 그 편리함이 사용자의 정보와 선택권을 희생해서 만들어져서는 안 된다고 믿습니다.
+
+---
+
+## Privacy & Security (English)
+
+Skill Studio is a static browser tool for writing instructions and exporting a `SKILL.md` file. This section describes the current implementation, not a legal agreement or security certification.
+
+- Skill names, descriptions, steps, and rules may contain sensitive information. Do not put API keys, passwords, or internal-only data into a Skill.
+- Drafts and theme preferences are saved in this browser’s `localStorage`. There are no accounts, server-side draft storage, public document links, or Skill discovery features.
+- The app does not upload drafts. Content leaves the editor only when you choose to copy it to the clipboard or download a file. A generated file added to a public repository may become visible to others, so review it before sharing.
+- Clearing browser site data may delete the saved draft and theme preference. Downloaded files and clipboard contents remain under your device’s control; remove them separately if needed.
+- The static app needs no server API key. If browser storage is unavailable, editing still works but the draft may not persist; download important work explicitly.
+
+We treat clear data handling and user control as part of product quality. Any future AI feature must update this description before it sends drafts to an external provider.
