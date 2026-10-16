@@ -6,7 +6,7 @@
 
 `index.html`을 브라우저에서 열거나, 이 폴더에서 정적 서버를 실행하세요. 첫 화면에서 바로 Skill을 만들 수 있습니다.
 
-Skill이 처음이라면 `about.html`에서 정의와 사용 순서를, `benefits.html`에서 사용 전후 예시를 볼 수 있습니다. 편집 화면의 “Skill 알아보기” 링크에서 시작하세요.
+Skill이 처음이라면 `about.html`에서 정의와 사용 순서를, `benefits.html`에서 사용 전후 예시를 볼 수 있습니다. 편집 화면의 “Skill이란? · 왜 쓸까요?” 링크에서 시작하세요.
 
 ```sh
 python3 -m http.server 8765

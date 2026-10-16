@@ -10,7 +10,8 @@ function runLocale(search) {
   const nodes = [
     { nodeValue: '새 Skill 만들기' },
     { nodeValue: '어디에서 사용하나요?' },
-    { nodeValue: '완성도 점검' }
+    { nodeValue: '완성도 점검' },
+    { nodeValue: 'Skill이란? · 왜 쓸까요?' }
   ];
   const languageLink = {
     href: '', textContent: '', lang: '',
@@ -72,6 +73,7 @@ test('English translates editor copy and preserves the locale in navigation', ()
   assert.equal(result.document.documentElement.lang, 'en');
   assert.equal(result.nodes[0].nodeValue, 'Create a Skill');
   assert.equal(result.nodes[1].nodeValue, 'Where do I use it?');
+  assert.equal(result.nodes[3].nodeValue, 'What is a Skill? · Why use one?');
   assert.equal(result.languageLink.textContent, '한국어');
   assert.equal(result.brand.href, './?lang=en');
   assert.equal(result.aboutLink.href, './about.html?lang=en');

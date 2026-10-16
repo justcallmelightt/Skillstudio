@@ -20,7 +20,7 @@ if (english) {
   const phrases = new Map(Object.entries({
     '새 Skill 만들기': 'Create a Skill',
     'Skill 만들기': 'Create a Skill',
-    'Skill 알아보기': 'Explore Skills',
+    'Skill이란? · 왜 쓸까요?': 'What is a Skill? · Why use one?',
     'Skill을 쓰면 뭐가 달라질까요?': 'What changes with a Skill?',
     '반복 설명을 줄이는 실제 예시 대화를 따로 살펴보세요.': 'See real-world examples of how a Skill reduces repeated explanations.',
     'Skill의 장점 보기': 'See the benefits',
