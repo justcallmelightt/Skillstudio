@@ -2,7 +2,14 @@
 
 # Skill Studio
 
+![HTML5](https://img.shields.io/badge/HTML5-current-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-current-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-current-F7DF1E?logo=javascript&logoColor=black)
+![TypeScript](https://img.shields.io/badge/Next-TypeScript-3178C6?logo=typescript&logoColor=white)
+
 Codex와 Claude Code에서 사용할 `SKILL.md` 초안을 작성하는 정적 웹 편집기입니다. 직접 작성하고, 실시간 미리보기와 완성도 점검을 거쳐 내용을 복사하거나 파일로 다운로드할 수 있습니다. AI 초안 작성, Skill 실행, 도구에 자동 설치하는 기능은 제공하지 않습니다.
+
+**개발 방향:** Skill Studio의 새 개발은 TypeScript로 시작합니다. 파일 처리나 검증 작업이 크게 늘어나면, 처음부터 Python을 추가하기보다 해당 작업에 한정해 도입을 검토합니다.
 
 ## 로컬에서 실행
 

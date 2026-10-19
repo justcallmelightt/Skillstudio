@@ -2,7 +2,14 @@
 
 # Skill Studio
 
+![HTML5](https://img.shields.io/badge/HTML5-current-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-current-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-current-F7DF1E?logo=javascript&logoColor=black)
+![TypeScript](https://img.shields.io/badge/Next-TypeScript-3178C6?logo=typescript&logoColor=white)
+
 Skill Studio is a static, browser-based editor for drafting `SKILL.md` files for Codex and Claude Code. It supports manual writing, live preview, completeness checks, copying, and downloading. It does not generate drafts with AI, run your Skill, or install it automatically.
+
+**Implementation direction:** Start new Skill Studio development in TypeScript. If file processing or validation grows substantially, evaluate Python for those isolated tasks rather than adding it preemptively.
 
 ## Run locally
 
