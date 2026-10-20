@@ -16,18 +16,19 @@
       document.querySelector('meta[name="theme-color"]').content = document.documentElement.dataset.theme === 'dark' ? '#000000' : '#fafcff';
     </script>
     <title>Skill이란? — Skill Studio</title>
-    <link rel="stylesheet" href="./style.css?v=en-mvp-3" />
-    <script src="./i18n.js?v=en-mvp-4" defer></script>
-    <script src="./about.js?v=en-mvp-3" defer></script>
+    <link rel="stylesheet" href="./style.css?v=guide-glow-2" />
+    <script src="./i18n.js?v=guide-a11y-1" defer></script>
+    <script src="./about.js?v=guide-timer-3" defer></script>
   </head>
-  <body>
+  <body class="about-page">
+    <a class="about-skip-link" href="#about-content">본문으로 건너뛰기</a>
     <div class="app-shell">
       <header class="topbar">
         <a class="brand" href="./index.html" aria-label="Skill Studio 처음으로"><span class="brand-mark" aria-hidden="true">✳</span><span>skill<span class="brand-light">studio</span></span></a>
         <div class="topbar-right"><div class="header-preferences"><a class="language-link" data-language-link href="?lang=en" lang="en">English</a><button class="theme-toggle" type="button" id="theme-toggle" aria-label="다크 모드로 전환" title="다크 모드로 전환"><span class="theme-glyph" aria-hidden="true"></span></button></div><a class="button button-quiet about-top-action" href="./index.html">Skill 만들기 <span aria-hidden="true">↗</span></a></div>
       </header>
 
-      <main class="about-main">
+      <main class="about-main" id="about-content" tabindex="-1">
         <header class="about-intro">
           <p class="about-overline">Skill Studio 안내</p>
           <h1>Skill이란?</h1>
@@ -47,7 +48,7 @@
               <button class="about-ai-tab" type="button" role="tab" id="example-tab-review" aria-controls="example-panel-review" aria-selected="false" tabindex="-1" data-example-tab>코드 리뷰</button>
               <button class="about-ai-tab" type="button" role="tab" id="example-tab-writing" aria-controls="example-panel-writing" aria-selected="false" tabindex="-1" data-example-tab>글쓰기</button>
             </div>
-            <div class="about-ai-conversation" role="tabpanel" id="example-panel-design" aria-labelledby="example-tab-design" data-example-panel>
+            <div class="about-ai-conversation" role="tabpanel" id="example-panel-design" aria-labelledby="example-tab-design" tabindex="0" data-example-panel>
               <p class="about-ai-before-label">Skill 없이 <span>매번 기준을 다시 설명</span></p>
               <p class="about-ai-user about-ai-user-before">이 화면의 정보 계층과 간격을 다듬고 실제 UI에 반영해줘. 먼저 화면 목적과 사용자를 살펴보고, 색상과 타이포그래피를 정리해줘. 버튼을 누를 때 반응이 있는지, 글자 대비가 충분한지 확인하고 모바일과 키보드 사용도 점검해줘.</p>
               <div class="about-ai-response"><span class="about-ai-response-mark" aria-hidden="true">✳</span><div><p class="about-ai-before-answer">색상과 간격을 조정했어요. 버튼 상태와 모바일 화면은 아직 반영하지 않았어요.</p></div></div>
@@ -60,7 +61,7 @@
               <p class="about-ai-user">thoughtful-ui-design로 이 화면의 정보 계층과 간격을 다듬어줘. 모바일도 확인해줘.</p>
               <div class="about-ai-response"><span class="about-ai-response-mark" aria-hidden="true">✳</span><div><p class="about-ai-loading" hidden><span class="about-ai-pixels" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Skill의 디자인 기준을 읽는 중</span></p><p class="about-ai-answer">thoughtful-ui-design을 사용하여 시각적 중심, 대비, 버튼 반응을 점검하고 수정할게요.</p></div></div>
             </div>
-            <div class="about-ai-conversation" role="tabpanel" id="example-panel-review" aria-labelledby="example-tab-review" data-example-panel hidden>
+            <div class="about-ai-conversation" role="tabpanel" id="example-panel-review" aria-labelledby="example-tab-review" tabindex="0" data-example-panel hidden>
               <p class="about-ai-before-label">Skill 없이 <span>매번 기준을 다시 설명</span></p>
               <p class="about-ai-user about-ai-user-before">이번 코드 변경을 검토해줘. 변경 목적과 영향받는 파일을 먼저 확인하고 기존 동작과 비교해줘. 문제를 찾으면 재현 조건과 코드 근거를 함께 적어줘. 확인하지 못한 추측이나 스타일 취향은 결함처럼 단정하지 말고 중요도순으로 알려줘.</p>
               <div class="about-ai-response"><span class="about-ai-response-mark" aria-hidden="true">✳</span><div><p class="about-ai-before-answer">코드 스타일과 변수 이름부터 정리했어요.</p></div></div>
@@ -73,7 +74,7 @@
               <p class="about-ai-user">focused-code-review Skill로 이번 변경을 검토해줘. 재현 가능한 문제만 알려줘.</p>
               <div class="about-ai-response"><span class="about-ai-response-mark" aria-hidden="true">✳</span><div><p class="about-ai-loading" hidden><span class="about-ai-pixels" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Skill의 검토 기준을 읽는 중</span></p><p class="about-ai-answer">focused-code-review를 사용하여 변경 목적과 영향받는 동작을 확인하고, 근거가 있는 문제부터 정리할게요.</p></div></div>
             </div>
-            <div class="about-ai-conversation" role="tabpanel" id="example-panel-writing" aria-labelledby="example-tab-writing" data-example-panel hidden>
+            <div class="about-ai-conversation" role="tabpanel" id="example-panel-writing" aria-labelledby="example-tab-writing" tabindex="0" data-example-panel hidden>
               <p class="about-ai-before-label">Skill 없이 <span>매번 기준을 다시 설명</span></p>
               <p class="about-ai-user about-ai-user-before">이 안내 문장을 더 쉽고 자연스럽게 바꿔줘. 글의 목적과 읽는 사람을 고려하고, 한 문단에는 한 생각만 담아줘. 내가 쓴 고유명사와 수치는 유지하고 과장하거나 근거 없는 사실은 넣지 마. 읽었을 때 어색한 표현도 고쳐줘.</p>
               <div class="about-ai-response"><span class="about-ai-response-mark" aria-hidden="true">✳</span><div><p class="about-ai-before-answer">더 눈에 띄도록 효과를 과장한 문장으로 바꿨어요.</p></div></div>

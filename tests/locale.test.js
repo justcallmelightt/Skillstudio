@@ -11,7 +11,8 @@ function runLocale(search) {
     { nodeValue: '새 Skill 만들기' },
     { nodeValue: '어디에서 사용하나요?' },
     { nodeValue: '완성도 점검' },
-    { nodeValue: 'Skill이란? 왜 쓸까요?' }
+    { nodeValue: 'Skill이란? 왜 쓸까요?' },
+    { nodeValue: '본문으로 건너뛰기' }
   ];
   const languageLink = {
     href: '', textContent: '', lang: '',
@@ -70,6 +71,7 @@ test('English translates editor copy and preserves the locale in navigation', ()
   assert.equal(result.nodes[0].nodeValue, 'Create a Skill');
   assert.equal(result.nodes[1].nodeValue, 'Where do I use it?');
   assert.equal(result.nodes[3].nodeValue, 'What is a Skill? Why use one?');
+  assert.equal(result.nodes[4].nodeValue, 'Skip to main content');
   assert.equal(result.languageLink.textContent, '한국어');
   assert.equal(result.brand.href, './?lang=en');
   assert.equal(result.aboutLink.href, './about.html?lang=en');
@@ -81,6 +83,7 @@ test('Korean remains the default and keeps its original copy', () => {
   const result = runLocale('');
   assert.equal(result.document.documentElement.lang, 'ko');
   assert.equal(result.nodes[0].nodeValue, '새 Skill 만들기');
+  assert.equal(result.nodes[4].nodeValue, '본문으로 건너뛰기');
   assert.equal(result.languageLink.textContent, 'English');
   assert.equal(result.aboutLink.href, './about.html');
 });

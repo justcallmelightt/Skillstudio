@@ -73,6 +73,7 @@ if (english) {
     'Claude Code 공식 가이드 ↗': 'Claude Code official guide ↗',
     '좋은 지침은 좋은 결과의 시작입니다.': 'Better instructions start better work.',
     'Skill Studio 안내': 'Skill Studio guide',
+    '본문으로 건너뛰기': 'Skip to main content',
     'Skill이란?': 'What is a Skill?',
     'AI에게 매번 다시 설명하던 작업 방식을, 다음에도 꺼내 쓸 수 있도록 정리한 지침입니다.': 'A reusable set of instructions for the workflow you used to explain to AI again and again.',
     '파일 하나에서 시작해요.': 'Start with one file.',
