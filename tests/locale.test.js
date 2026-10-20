@@ -11,7 +11,7 @@ function runLocale(search) {
     { nodeValue: '새 Skill 만들기' },
     { nodeValue: '어디에서 사용하나요?' },
     { nodeValue: '완성도 점검' },
-    { nodeValue: 'Skill이란? · 왜 쓸까요?' }
+    { nodeValue: 'Skill이란? 왜 쓸까요?' }
   ];
   const languageLink = {
     href: '', textContent: '', lang: '',
@@ -20,10 +20,6 @@ function runLocale(search) {
   const brand = { href: './' };
   const aboutLink = {
     href: './about.html',
-    getAttribute() { return this.href; }
-  };
-  const benefitsLink = {
-    href: './benefits.html',
     getAttribute() { return this.href; }
   };
   const field = { placeholder: '예: thoughtful-ui-review' };
@@ -40,7 +36,7 @@ function runLocale(search) {
     querySelectorAll(selector) {
       return ({
         '[data-language-link]': [languageLink],
-        'a[href^="./about.html"], a[href^="./benefits.html"], a[href^="./index.html"]': [aboutLink, benefitsLink],
+        'a[href^="./about.html"], a[href^="./index.html"]': [aboutLink],
         'a.brand[href="./"]': [brand],
         '[placeholder]': [field],
         '[aria-label]': [label]
@@ -65,7 +61,7 @@ function runLocale(search) {
     window: {}, document, location: { search, pathname: '/Skillstudio/' },
     NodeFilter: { SHOW_TEXT: 4 }, URLSearchParams
   });
-  return { document, nodes, languageLink, brand, aboutLink, benefitsLink, field, label };
+  return { document, nodes, languageLink, brand, aboutLink, field, label };
 }
 
 test('English translates editor copy and preserves the locale in navigation', () => {
@@ -73,11 +69,10 @@ test('English translates editor copy and preserves the locale in navigation', ()
   assert.equal(result.document.documentElement.lang, 'en');
   assert.equal(result.nodes[0].nodeValue, 'Create a Skill');
   assert.equal(result.nodes[1].nodeValue, 'Where do I use it?');
-  assert.equal(result.nodes[3].nodeValue, 'What is a Skill? · Why use one?');
+  assert.equal(result.nodes[3].nodeValue, 'What is a Skill? Why use one?');
   assert.equal(result.languageLink.textContent, '한국어');
   assert.equal(result.brand.href, './?lang=en');
   assert.equal(result.aboutLink.href, './about.html?lang=en');
-  assert.equal(result.benefitsLink.href, './benefits.html?lang=en');
   assert.equal(result.field.placeholder, 'e.g. thoughtful-ui-review');
   assert.equal(result.label.value, 'Show Skill name help');
 });

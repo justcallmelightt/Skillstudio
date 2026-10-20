@@ -1,6 +1,5 @@
 const themeToggle = document.querySelector('#theme-toggle');
 const tr = window.studioText;
-const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
 
 function syncThemeControl() {
   const isDark = document.documentElement.dataset.theme === 'dark';
@@ -17,12 +16,6 @@ themeToggle.addEventListener('click', () => {
   try { localStorage.setItem('skill-studio-theme', nextTheme); } catch { /* Keep the current visit usable. */ }
   syncThemeControl();
 });
-systemTheme.addEventListener('change', (event) => {
-  try { if (localStorage.getItem('skill-studio-theme')) return; } catch { /* Follow system setting. */ }
-  document.documentElement.dataset.theme = event.matches ? 'dark' : 'light';
-  syncThemeControl();
-});
-
 const exampleTabs = [...document.querySelectorAll('[data-example-tab]')];
 const examplePanels = [...document.querySelectorAll('[data-example-panel]')];
 const exampleWindow = document.querySelector('.about-ai-window');

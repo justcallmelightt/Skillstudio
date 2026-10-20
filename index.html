@@ -1,36 +1,36 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" class="editor-page">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="referrer" content="no-referrer" />
-    <meta name="theme-color" content="#fafcff" />
+    <meta name="theme-color" content="#000000" />
     <meta name="description" content="질문에 답하며 나만의 AI Skill을 만들고 SKILL.md로 내보내세요." />
     <script>
       try {
         const savedTheme = localStorage.getItem('skill-studio-theme');
-        document.documentElement.dataset.theme = savedTheme === 'light' || savedTheme === 'dark'
-          ? savedTheme
-          : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'dark';
       } catch {
-        document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = 'dark';
       }
+      document.querySelector('meta[name="theme-color"]').content = document.documentElement.dataset.theme === 'dark' ? '#000000' : '#fafcff';
     </script>
     <title>Skill Studio — 나만의 Skill 만들기</title>
-    <link rel="stylesheet" href="./style.css?v=en-mvp-2" />
+    <link rel="stylesheet" href="./style.css?v=en-mvp-5" />
     <script src="./i18n.js?v=en-mvp-3" defer></script>
-    <script src="./script.js?v=en-mvp-2" defer></script>
+    <script src="./script.js?v=en-mvp-3" defer></script>
   </head>
-  <body>
+  <body class="editor-motion-ready">
+    <div class="editor-startup-spotlight" aria-hidden="true"></div>
     <div class="app-shell">
       <header class="topbar">
         <a class="brand" href="./" aria-label="Skill Studio 처음으로"><span class="brand-mark" aria-hidden="true">✳</span><span>skill<span class="brand-light">studio</span></span></a>
-        <div class="topbar-right"><span class="local-pill"><span class="status-dot"></span> 내 브라우저에 자동 저장</span><a class="language-link" data-language-link href="?lang=en" lang="en">English</a><button class="theme-toggle" type="button" id="theme-toggle" aria-label="다크 모드로 전환" title="다크 모드로 전환"><span class="theme-glyph" aria-hidden="true"></span></button></div>
+        <div class="topbar-right"><span class="local-pill"><span class="status-dot"></span> 내 브라우저에 자동 저장</span><div class="header-preferences"><a class="language-link" data-language-link href="?lang=en" lang="en">English</a><button class="theme-toggle" type="button" id="theme-toggle" aria-label="다크 모드로 전환" title="다크 모드로 전환"><span class="theme-glyph" aria-hidden="true"></span></button></div></div>
       </header>
 
       <main id="top">
         <section class="editor-intro" aria-labelledby="page-title">
-          <div class="editor-intro-row"><div class="editor-title-row"><h1 id="page-title">새 Skill 만들기</h1><a class="intro-guide-link" href="./about.html">Skill이란? · 왜 쓸까요? <span aria-hidden="true">↗</span></a></div><p class="editor-intro-definition">Skill은 AI에게 매번 다시 설명하던 작업 방식을, 다음에도 꺼내 쓸 수 있도록 정리한 지침입니다.</p><p>내 작업 방식을 적으면 오른쪽에서 <code>SKILL.md</code>로 정리됩니다.</p></div>
+          <div class="editor-intro-row"><div class="editor-title-row"><h1 id="page-title">새 Skill 만들기</h1><a class="intro-guide-link" href="./about.html">Skill이란? 왜 쓸까요? <span aria-hidden="true">↗</span></a></div><p class="editor-intro-definition">Skill은 AI에게 매번 다시 설명하던 작업 방식을, 다음에도 꺼내 쓸 수 있도록 정리한 지침입니다.</p><p>내 작업 방식을 적으면 오른쪽에서 <code>SKILL.md</code>로 정리됩니다.</p></div>
         </section>
 
         <section class="workspace" aria-label="Skill 만들기 작업 공간">

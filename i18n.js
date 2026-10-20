@@ -12,7 +12,7 @@ document.querySelectorAll('[data-language-link]').forEach((link) => {
 
 if (english) {
   document.documentElement.lang = 'en';
-  document.querySelectorAll('a[href^="./about.html"], a[href^="./benefits.html"], a[href^="./index.html"]').forEach((link) => {
+  document.querySelectorAll('a[href^="./about.html"], a[href^="./index.html"]').forEach((link) => {
     link.href = `${link.getAttribute('href')}?lang=en`;
   });
   document.querySelectorAll('a.brand[href="./"]').forEach((link) => { link.href = './?lang=en'; });
@@ -20,10 +20,7 @@ if (english) {
   const phrases = new Map(Object.entries({
     '새 Skill 만들기': 'Create a Skill',
     'Skill 만들기': 'Create a Skill',
-    'Skill이란? · 왜 쓸까요?': 'What is a Skill? · Why use one?',
-    'Skill을 쓰면 뭐가 달라질까요?': 'What changes with a Skill?',
-    '반복 설명을 줄이는 실제 예시 대화를 따로 살펴보세요.': 'See real-world examples of how a Skill reduces repeated explanations.',
-    'Skill의 장점 보기': 'See the benefits',
+    'Skill이란? 왜 쓸까요?': 'What is a Skill? Why use one?',
     'Skill을 쓰면 뭐가 좋을까요?': 'Why use a Skill?',
     '같은 기준을 여러 번 설명하는 대신, 이름으로 불러 다시 사용할 수 있어요.': 'Call a saved workflow by name instead of explaining the same criteria again.',
     'Skill이 처음인가요?': 'New to Skills?',

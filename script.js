@@ -13,9 +13,23 @@ const themeToggle = document.querySelector('#theme-toggle');
 const guideTabs = [...document.querySelectorAll('[data-guide-tab]')];
 const platformGuide = document.querySelector('.platform-guide');
 const fieldInfoButtons = [...document.querySelectorAll('[data-field-info]')];
-const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
 let toastTimer;
 let previewMotionTimer;
+
+if ('IntersectionObserver' in window) {
+  const pageElements = document.querySelectorAll('.topbar > *, .editor-intro-row > *, .builder > .panel-heading, .builder > .template-row, .builder .form-section, .builder-footer, .preview-stack > :not(.platform-guide), .site-footer > *');
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-revealed');
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+  pageElements.forEach((element) => {
+    element.classList.add('page-reveal');
+  });
+  pageElements.forEach((element) => revealObserver.observe(element));
+}
 
 if (platformGuide && 'IntersectionObserver' in window) {
   const guideObserver = new IntersectionObserver((entries, observer) => {
@@ -81,12 +95,6 @@ themeToggle.addEventListener('click', () => {
   try { localStorage.setItem('skill-studio-theme', nextTheme); } catch { /* Theme still works for this visit. */ }
   syncThemeControl();
 });
-systemTheme.addEventListener('change', (event) => {
-  try { if (localStorage.getItem('skill-studio-theme')) return; } catch { /* Follow system theme when storage is unavailable. */ }
-  document.documentElement.dataset.theme = event.matches ? 'dark' : 'light';
-  syncThemeControl();
-});
-
 const templates = {
   blank: {},
   design: {

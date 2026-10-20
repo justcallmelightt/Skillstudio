@@ -244,12 +244,13 @@ textarea,
 
 /* Platform help is part of the work area, not a promotional card. */
 .platform-guide { padding: 23px 4px 8px; color: inherit; }
-.language-link { flex: none; padding: 8px 2px; color: #6e6e73; font-size: 12px; font-weight: 650; text-decoration: underline; text-underline-offset: 4px; transition: color .15s ease, opacity .15s ease; }
-.language-link:hover { color: #1d1d1f; }
-.language-link:active { opacity: .65; }
-:root[data-theme="dark"] .language-link { color: #a1a1a6; }
-:root[data-theme="dark"] .language-link:hover { color: #fff; }
-@media (max-width: 620px) { .topbar-right { gap: 12px; } .language-link { font-size: 11px; } }
+.header-preferences { display: inline-flex; align-items: center; gap: 6px; flex: none; }
+.language-link { display: inline-flex; align-items: center; justify-content: center; flex: none; min-width: 58px; height: 38px; padding: 0 10px; border: 1px solid #d8d8dc; border-radius: 9px; background: #fff; color: #1d1d1f; font-size: 11px; font-weight: 650; text-decoration: none; transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease; }
+.language-link:hover { background: #ededf0; border-color: #c7c7cc; }
+.language-link:active { transform: scale(.96); }
+:root[data-theme="dark"] .language-link { color: #e5e5e7; background: #242426; border-color: #3b3b3d; }
+:root[data-theme="dark"] .language-link:hover { color: #fff; background: #303033; border-color: #626266; }
+@media (max-width: 620px) { .topbar-right { gap: 12px; } .header-preferences { gap: 5px; } .language-link { min-width: 52px; height: 35px; padding: 0 8px; font-size: 10px; } }
 .platform-guide.guide-motion-ready { transition: opacity 600ms ease-out, transform 700ms cubic-bezier(.18,.72,.2,1); }
 .platform-guide.guide-motion-ready:not(.is-revealed) { opacity: 0; transform: translateY(12px); }
 .guide-heading h2 { margin: 0; font-size: 17px; font-weight: 650; letter-spacing: -.035em; line-height: 1.15; }
@@ -316,8 +317,8 @@ textarea,
 .intro-guide-link:hover { color: #1c1c1e; }
 .intro-guide-link:active { transform: scale(.975); }
 .about-main { max-width: 960px; margin: 0 auto; padding: 68px 0 88px; }
-.about-motion-ready .page-reveal { transition: opacity 600ms ease-out, transform 700ms cubic-bezier(.18,.72,.2,1); }
-.about-motion-ready .page-reveal:not(.is-revealed) { opacity: 0; transform: translateY(12px); }
+.about-motion-ready .page-reveal, .editor-motion-ready .page-reveal { transition: opacity 600ms ease-out, transform 700ms cubic-bezier(.18,.72,.2,1); }
+.about-motion-ready .page-reveal:not(.is-revealed), .editor-motion-ready .page-reveal:not(.is-revealed) { opacity: 0; transform: translateY(12px); }
 .about-overline { margin: 0 0 16px; color: #6e6e73; font-size: 12px; font-weight: 650; }
 .about-intro h1 { margin: 0; font-size: clamp(46px, 6vw, 72px); line-height: 1.08; letter-spacing: -.065em; font-weight: 680; }
 .about-lead { max-width: 650px; margin: 23px 0 0; color: #55555c; font-size: clamp(17px, 2vw, 21px); line-height: 1.65; word-break: keep-all; }
@@ -453,18 +454,32 @@ textarea,
 :root[data-theme="dark"] .builder input:focus,
 :root[data-theme="dark"] .builder textarea:focus { border-color: #b6b6ba; box-shadow: 0 0 0 3px rgba(255,255,255,.11); }
 
-/* Builder sequence and a quiet confirmation when the generated file changes. */
-@keyframes studio-arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+/* Tile's separate travel and illumination beats, recolored for Skill Studio. */
+:root.editor-page[data-theme="dark"] { background-color: #000; background-image: none; }
+:root.editor-page[data-theme="light"] { background-color: #fafcff; background-image: none; }
+.editor-motion-ready .app-shell { position: relative; z-index: 1; }
+.editor-startup-spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at bottom right, rgba(26, 53, 112, .62) 0%, rgba(19, 42, 92, .38) 30%, transparent 70%);
+  transform-origin: 100% 100%;
+  animation: editor-spotlight-rise 2.8s cubic-bezier(.22,.61,.36,1) 250ms both,
+             editor-spotlight-illuminate 2.8s cubic-bezier(.4,0,.2,1) 250ms both;
+}
+:root[data-theme="light"] .editor-startup-spotlight {
+  background: radial-gradient(circle at bottom right, rgba(88, 130, 228, .12) 0%, rgba(88, 130, 228, .05) 35%, transparent 70%);
+}
+@keyframes editor-spotlight-rise { from { transform: translate3d(0, 20vh, 0); } to { transform: translate3d(0, 0, 0); } }
+@keyframes editor-spotlight-illuminate { from { opacity: 0; } to { opacity: 1; } }
 @keyframes preview-refresh { 0% { opacity: .62; transform: translateY(3px); } 100% { opacity: 1; transform: translateY(0); } }
-.topbar > * { animation: studio-arrive 480ms cubic-bezier(.2,.75,.25,1) both; }
-.intro { animation: studio-arrive 560ms cubic-bezier(.2,.75,.25,1) 55ms both; }
-.workspace > :first-child { animation: studio-arrive 620ms cubic-bezier(.2,.75,.25,1) 100ms both; }
-.workspace > :last-child { animation: studio-arrive 620ms cubic-bezier(.2,.75,.25,1) 175ms both; }
 .code-preview.is-updating { animation: preview-refresh 260ms ease-out both; }
 .quality-list li::before { transition: color 180ms ease, transform 220ms cubic-bezier(.2,.75,.25,1); }
 .quality-list li.is-complete::before { transform: scale(1.08); }
 @media (prefers-reduced-motion: reduce) {
-  .topbar > *, .intro, .workspace > :first-child, .workspace > :last-child { animation: studio-fade .15s ease-out both; }
+  .editor-startup-spotlight { animation: studio-fade .15s ease-out both; }
+  .editor-motion-ready .page-reveal, .editor-motion-ready .page-reveal:not(.is-revealed) { opacity: 1; transform: none; transition: opacity .15s ease-out; animation: studio-fade .15s ease-out both; }
   .code-preview.is-updating { animation: studio-fade .15s ease-out both; }
   .quality-list li::before { transition: opacity .15s ease; transform: none; }
   @keyframes studio-fade { from { opacity: .6; } to { opacity: 1; } }
