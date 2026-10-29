@@ -16,9 +16,9 @@
       document.querySelector('meta[name="theme-color"]').content = document.documentElement.dataset.theme === 'dark' ? '#000000' : '#fafcff';
     </script>
     <title>Skill이란? — Skill Studio</title>
-    <link rel="stylesheet" href="./style.css?v=guide-glow-2" />
-    <script src="./i18n.js?v=guide-a11y-1" defer></script>
-    <script src="./about.js?v=guide-timer-3" defer></script>
+    <link rel="stylesheet" href="./style.css?v=case-3" />
+    <script src="./i18n.js?v=case-3" defer></script>
+    <script src="./about.js?v=case-2" defer></script>
   </head>
   <body class="about-page">
     <a class="about-skip-link" href="#about-content">본문으로 건너뛰기</a>
@@ -90,6 +90,21 @@
           </div>
           <p class="about-ai-caption">위 대화들은 실제 경험을 바탕으로 재구성한 예시입니다.</p>
           <p class="about-benefits-note">실제 결과는 Skill 내용과 요청에 따라 달라집니다.</p>
+        </section>
+
+        <section class="about-case" aria-labelledby="case-title">
+          <div class="about-case-heading"><div><p class="about-overline">구현 사례</p><h2 id="case-title">숫자가 사라지던 카운터</h2></div><p>Skill 없이 만든 첫 결과물과 Skill 기준으로 만든 결과물을 같은 숫자로 비교해보세요.</p></div>
+          <div class="about-case-grid">
+            <div class="about-case-problem"><span class="about-case-kicker">Skill 없이 첫 결과물</span><p>0에서는 보였지만 1에서 다음 숫자가 가려지고, 2에서는 숫자가 사라졌습니다. <code>/6</code>도 아래로 밀렸습니다.</p><small>숫자 창까지 움직여 다음 값이 보이지 않았습니다.</small></div>
+            <div class="about-case-rule"><span class="about-case-kicker">Skill에 남긴 기준</span><p>숫자를 보여주는 창은 고정하고, 그 안의 숫자 트랙만 움직입니다. <code>/6</code>은 창 밖의 같은 줄에 둡니다.</p><small><strong>rolling-score-counter</strong> · 한 번 저장하면 같은 기준을 매번 다시 설명하지 않아도 됩니다.</small></div>
+          </div>
+          <div class="about-case-demo"><div class="about-case-demo-heading"><span class="about-case-kicker">같은 값으로 비교</span><p>0 → 1 → 2 → 6을 눌러 두 결과의 숫자와 <code>/6</code> 위치를 비교하세요.</p></div><div class="about-case-buttons" role="group" aria-label="카운터 값 선택"><button type="button" data-case-score="0" aria-pressed="true">0</button><button type="button" data-case-score="1" aria-pressed="false">1</button><button type="button" data-case-score="2" aria-pressed="false">2</button><button type="button" data-case-score="6" aria-pressed="false">6</button></div></div>
+          <div class="about-case-comparison">
+            <div class="about-case-result"><span class="about-case-kicker">Skill 없이 첫 결과물</span><div class="about-case-readout about-case-first-readout" aria-hidden="true"><span class="about-case-first-clip"><span class="about-case-window about-case-first-window" id="case-first-window"><span class="about-case-track"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span></span></span><span class="about-case-total">/ 6</span></div><p>창이 함께 올라가 다음 숫자가 가려집니다.</p></div>
+            <div class="about-case-result about-case-result-fixed"><span class="about-case-kicker">Skill을 사용한 첫 결과물</span><div class="about-case-readout" aria-hidden="true"><span class="about-case-window"><span class="about-case-track" id="case-score-track"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span></span><span class="about-case-total">/ 6</span></div><p>창은 고정하고 숫자만 굴러갑니다.</p></div>
+          </div>
+          <span class="sr-only" id="case-score-status" role="status" aria-live="polite">0 / 6</span>
+          <p class="about-case-footnote">실제 시행착오를 바탕으로 두 상태를 재구성한 시연입니다. 첫 결과물의 오류가 모든 작업에서 반복되는 것은 아니며, <span class="about-case-caution">Skill을 사용한 실제 결과도 요청과 환경에 따라 달라질 수 있습니다.</span> 자동 성능 비교는 아닙니다.</p>
         </section>
 
         <section class="about-steps" aria-labelledby="steps-title">

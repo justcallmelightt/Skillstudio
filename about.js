@@ -41,6 +41,24 @@ if ('IntersectionObserver' in window) {
   exampleWindow?.classList.add('chat-motion-ready');
 }
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const caseTrack = document.querySelector('#case-score-track');
+const caseFirstWindow = document.querySelector('#case-first-window');
+const caseFirstReadout = document.querySelector('.about-case-first-readout');
+const caseStatus = document.querySelector('#case-score-status');
+document.querySelectorAll('[data-case-score]').forEach((button) => {
+  button.addEventListener('click', () => {
+    const score = Number(button.dataset.caseScore);
+    caseFirstWindow.style.transform = `translateY(-${score}em)`;
+    caseFirstReadout.classList.toggle('is-shifted', score !== 0);
+    caseTrack.style.transform = `translateY(-${score}em)`;
+    caseStatus.textContent = score === 0
+      ? tr('두 결과 모두 0 / 6', 'Both results show 0 / 6')
+      : tr(`첫 결과물은 숫자가 가려지고, Skill 기준을 적용한 결과는 ${score} / 6입니다.`, `The first result clips its digit; the Skill-guided result shows ${score} / 6.`);
+    document.querySelectorAll('[data-case-score]').forEach((choice) => {
+      choice.setAttribute('aria-pressed', String(choice === button));
+    });
+  });
+});
 let exampleTimer;
 let streamTimer;
 let elapsedTimer;
