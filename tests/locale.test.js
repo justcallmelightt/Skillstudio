@@ -6,7 +6,7 @@ const vm = require('node:vm');
 
 const source = fs.readFileSync(path.join(__dirname, '..', 'i18n.js'), 'utf8');
 
-function runLocale(search) {
+function runLocale(search, { languages = ['ko-KR'], savedLanguage = null } = {}) {
   const nodes = [
     { nodeValue: '새 Skill 만들기' },
     { nodeValue: '어디에서 사용하나요?' },
@@ -23,7 +23,8 @@ function runLocale(search) {
   ];
   const languageLink = {
     href: '', textContent: '', lang: '',
-    setAttribute(name, value) { this[name] = value; }
+    setAttribute(name, value) { this[name] = value; },
+    addEventListener(name, handler) { this[name] = handler; }
   };
   const brand = { href: './' };
   const aboutLink = {
@@ -65,11 +66,17 @@ function runLocale(search) {
       };
     }
   };
+  const storage = {
+    value: savedLanguage,
+    getItem() { return this.value; },
+    setItem(_key, value) { this.value = value; }
+  };
   vm.runInNewContext(source, {
     window: {}, document, location: { search, pathname: '/Skillstudio/' },
-    NodeFilter: { SHOW_TEXT: 4 }, URLSearchParams
+    NodeFilter: { SHOW_TEXT: 4 }, URLSearchParams,
+    navigator: { languages, language: languages[0] }, localStorage: storage
   });
-  return { document, nodes, languageLink, brand, aboutLink, field, label };
+  return { document, nodes, languageLink, brand, aboutLink, field, label, storage };
 }
 
 test('English translates editor copy and preserves the locale in navigation', () => {
@@ -101,4 +108,27 @@ test('Korean remains the default and keeps its original copy', () => {
   assert.equal(result.nodes[5].nodeValue, '숫자가 사라지던 카운터');
   assert.equal(result.languageLink.textContent, 'English');
   assert.equal(result.aboutLink.href, './about.html');
+});
+
+test('browser language selects English when English is among preferred languages', () => {
+  const result = runLocale('', { languages: ['fr-FR', 'en-GB'] });
+  assert.equal(result.document.documentElement.lang, 'en');
+  assert.equal(result.nodes[0].nodeValue, 'Create a Skill');
+});
+
+test('explicit URL language takes priority over saved and browser preferences', () => {
+  const result = runLocale('?lang=ko', { languages: ['en-US'], savedLanguage: 'en' });
+  assert.equal(result.document.documentElement.lang, 'ko');
+  assert.equal(result.nodes[0].nodeValue, '새 Skill 만들기');
+});
+
+test('saved language takes priority over browser preferences', () => {
+  const result = runLocale('', { languages: ['en-US'], savedLanguage: 'ko' });
+  assert.equal(result.document.documentElement.lang, 'ko');
+});
+
+test('language switch remembers the manually selected locale', () => {
+  const result = runLocale('?lang=en', { languages: ['ko-KR'] });
+  result.languageLink.click();
+  assert.equal(result.storage.value, 'ko');
 });

@@ -1,17 +1,55 @@
 // The English MVP shares the Korean page structure and interaction code.
-const english = new URLSearchParams(location.search).get('lang') === 'en';
+const supportedLanguages = new Set(['ko', 'en']);
+const languageParam = new URLSearchParams(location.search).get('lang');
+const explicitLanguage = supportedLanguages.has(languageParam) ? languageParam : null;
+const languageStorageKey = 'skill-studio-language';
+
+function readSavedLanguage() {
+  try {
+    const saved = localStorage.getItem(languageStorageKey);
+    return supportedLanguages.has(saved) ? saved : null;
+  } catch {
+    return null;
+  }
+}
+
+function detectBrowserLanguage() {
+  const preferences = [
+    ...(Array.isArray(navigator.languages) ? navigator.languages : []),
+    navigator.language
+  ].filter(Boolean);
+
+  for (const preference of preferences) {
+    const primaryLanguage = String(preference).trim().toLowerCase().split(/[-_]/)[0];
+    if (supportedLanguages.has(primaryLanguage)) return primaryLanguage;
+  }
+
+  return 'ko';
+}
+
+const language = explicitLanguage || readSavedLanguage() || detectBrowserLanguage();
+const english = language === 'en';
 window.studioEnglish = english;
+window.studioLanguage = language;
 window.studioText = (korean, translation) => english ? translation : korean;
+document.documentElement.lang = language;
 
 document.querySelectorAll('[data-language-link]').forEach((link) => {
   link.href = english ? location.pathname : `${location.pathname}?lang=en`;
+  if (location.hash) link.href += location.hash;
   link.textContent = english ? '한국어' : 'English';
   link.lang = english ? 'ko' : 'en';
   link.setAttribute('aria-label', english ? 'Switch to Korean' : '영어로 전환');
+  link.addEventListener('click', () => {
+    try {
+      localStorage.setItem(languageStorageKey, english ? 'ko' : 'en');
+    } catch {
+      // The URL remains an explicit language choice when storage is unavailable.
+    }
+  });
 });
 
 if (english) {
-  document.documentElement.lang = 'en';
   document.querySelectorAll('a[href^="./about.html"], a[href^="./index.html"]').forEach((link) => {
     link.href = `${link.getAttribute('href')}?lang=en`;
   });
