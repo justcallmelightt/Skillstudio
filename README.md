@@ -1,4 +1,4 @@
-[English](README.md) | [한국어](README.ko.md)
+[English](#english) | [한국어](#한국어)
 
 # Skill Studio
 
@@ -6,6 +6,8 @@
 ![CSS3](https://img.shields.io/badge/CSS3-current-1572B6?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-current-F7DF1E?logo=javascript&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/Next-TypeScript-3178C6?logo=typescript&logoColor=white)
+
+## English
 
 Skill Studio is a static, browser-based editor for drafting `SKILL.md` files for Codex and Claude Code. It supports manual writing, live preview, completeness checks, copying, and downloading. It does not generate drafts with AI, run your Skill, or install it automatically.
 
@@ -40,12 +42,57 @@ No build tools or npm installation are required.
 
 The default theme is dark. Use the theme button in the upper-right corner to switch between light and dark; your choice is saved in the current browser.
 
-Use the language switch in the upper-right header to change the interface language. English opens with `?lang=en`. Your draft remains in the browser when switching languages, but text you have already written is not translated automatically.
+On a first visit, the interface follows a supported browser language. Use the language switch in the upper-right header to choose manually; your choice is remembered. A `?lang=en` or `?lang=ko` URL takes priority. Your draft remains in the browser when switching languages, but text you have already written is not translated automatically.
 
 Release notes and major public announcements are available in Korean and English. See the [release notes](./CHANGELOG.md).
 
 ## Privacy & security
 
-Drafts and theme preferences are stored in the browser's `localStorage`. They are not sent to a server. Copying and downloading `SKILL.md` happen only when you choose those actions.
+Drafts, theme preferences, and manual language choices are stored in the browser's `localStorage`. They are not sent to a server. Copying and downloading `SKILL.md` happen only when you choose those actions.
 
 See [Privacy & Security](./SECURITY.md#privacy--security-english) for details.
+
+## 한국어
+
+Skill Studio는 Codex와 Claude Code에서 사용할 `SKILL.md` 초안을 작성하는 정적 웹 편집기입니다. 직접 작성하고, 실시간 미리보기와 완성도 점검을 거쳐 내용을 복사하거나 파일로 다운로드할 수 있습니다. AI 초안 작성, Skill 실행, 도구에 자동 설치하는 기능은 제공하지 않습니다.
+
+AI의 도움으로 Skill을 만들고 싶다면 별도의 [Skill Studio Skill](./SKILL.md)을 코딩 에이전트에 제공할 수 있습니다. 반복 작업을 명확한 `SKILL.md`로 정리하도록 돕는 지침이며, 웹사이트 자체는 수동 편집기입니다.
+
+**개발 방향:** Skill Studio의 새 개발은 TypeScript로 시작합니다. 파일 처리나 검증 작업이 크게 늘어나면, 처음부터 Python을 추가하기보다 해당 작업에 한정해 도입을 검토합니다.
+
+### 로컬에서 실행
+
+브라우저에서 `index.html`을 열거나 이 폴더에서 정적 서버를 실행하세요.
+
+```sh
+python3 -m http.server 8765
+```
+
+그다음 `http://127.0.0.1:8765/`에 접속합니다.
+
+공개 페이지: <https://skillstudio0.vercel.app/> (`skillstudio.vercel.app`은 다른 팀이 소유 중이어서 대체 주소를 사용합니다.)
+
+GitHub Pages 미러: <https://justcallmelightt.github.io/Skillstudio/>
+
+### 사용 방법
+
+1. 빈 문서나 템플릿을 선택합니다.
+2. Skill 이름과 역할을 작성하고, 필요에 따라 작업 단계·기준·완료 확인을 적습니다.
+3. 실시간 미리보기를 확인하고 `SKILL.md`를 다운로드합니다.
+4. Skill 이름으로 폴더를 만들고 파일을 `폴더명/SKILL.md`로 저장합니다.
+
+사용 가이드에서 도구별 폴더 위치를 확인할 수 있습니다. Codex 프로젝트에서는 `.agents/skills/`, Claude Code 프로젝트에서는 `.claude/skills/` 아래에 Skill 이름의 폴더를 만드세요. 개인용 설치 경로도 안내합니다. 이 사이트는 다운로드할 파일을 만들 뿐, 도구에 자동 설치하지는 않습니다.
+
+별도의 빌드 도구나 npm 설치는 필요하지 않습니다.
+
+기본 테마는 다크 모드입니다. 오른쪽 위의 테마 버튼으로 라이트·다크 화면을 전환할 수 있으며, 선택한 테마는 현재 브라우저에 저장됩니다.
+
+첫 방문에는 지원하는 브라우저 언어에 맞춰 화면을 보여줍니다. 오른쪽 위에서 언어를 직접 바꾸면 선택을 기억하며, `?lang=en` 또는 `?lang=ko`를 지정한 URL이 우선합니다. 언어를 바꿔도 작성 중인 초안은 유지되지만, 이미 작성한 문장은 자동 번역되지 않습니다.
+
+릴리즈 노트와 주요 공개 안내는 한국어와 영어로 제공합니다. 변경 사항은 [릴리즈 노트](./CHANGELOG.md)에서 확인하세요.
+
+### 개인정보 보호 및 보안
+
+초안, 테마 설정, 직접 선택한 언어는 브라우저의 `localStorage`에 저장되며 서버로 전송되지 않습니다. `SKILL.md` 복사와 다운로드는 사용자가 직접 실행할 때만 이루어집니다.
+
+자세한 내용은 [개인정보 보호 및 보안](./SECURITY.md)을 참고하세요.
