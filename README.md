@@ -9,6 +9,8 @@
 
 Skill Studio is a static, browser-based editor for drafting `SKILL.md` files for Codex and Claude Code. It supports manual writing, live preview, completeness checks, copying, and downloading. It does not generate drafts with AI, run your Skill, or install it automatically.
 
+For agent-assisted Skill authoring, this repository also includes a separate [Skill Studio Skill](./SKILL.md). Give that file to a compatible coding agent to help it turn a recurring workflow into a focused `SKILL.md`. The website itself remains a manual editor.
+
 **Implementation direction:** Start new Skill Studio development in TypeScript. If file processing or validation grows substantially, evaluate Python for those isolated tasks rather than adding it preemptively.
 
 ## Run locally

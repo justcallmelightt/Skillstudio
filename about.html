@@ -16,9 +16,9 @@
       document.querySelector('meta[name="theme-color"]').content = document.documentElement.dataset.theme === 'dark' ? '#000000' : '#fafcff';
     </script>
     <title>Skill이란? — Skill Studio</title>
-    <link rel="stylesheet" href="./style.css?v=case-3" />
-    <script src="./i18n.js?v=case-4" defer></script>
-    <script src="./about.js?v=case-2" defer></script>
+    <link rel="stylesheet" href="./style.css?v=about-benefit-1" />
+    <script src="./i18n.js?v=about-benefit-1" defer></script>
+    <script src="./about.js?v=about-benefit-1" defer></script>
   </head>
   <body class="about-page">
     <a class="about-skip-link" href="#about-content">본문으로 건너뛰기</a>
@@ -34,6 +34,11 @@
           <h1>Skill이란?</h1>
           <p class="about-lead">AI에게 매번 다시 설명하던 작업 방식을, 다음에도 꺼내 쓸 수 있도록 정리한 지침입니다.</p>
         </header>
+
+        <section class="about-easy-start" aria-labelledby="easy-start-title">
+          <div><p class="about-overline">시작하기 쉬운 이유</p><h2 id="easy-start-title">Skill을 몰라도, 질문에 답하면 됩니다.</h2></div>
+          <p>이름, 맡길 일, 작업 순서처럼 익숙한 말로 적어보세요. Skill Studio가 답을 <code>SKILL.md</code> 형식으로 정리해주니 파일 구조를 먼저 배울 필요가 없습니다.</p>
+        </section>
 
         <section class="about-definition" aria-labelledby="definition-title">
           <div><h2 id="definition-title">파일 하나에서 시작해요.</h2><p>Skill의 중심은 <code>SKILL.md</code>라는 문서입니다. 어떤 일을 맡길지, 언제 사용하면 좋은지, 어떤 순서와 기준을 따라야 하는지를 적습니다. 필요하면 참고 자료나 스크립트를 같은 폴더에 더할 수도 있어요.</p></div>
@@ -90,6 +95,16 @@
           </div>
           <p class="about-ai-caption">위 대화들은 실제 경험을 바탕으로 재구성한 예시입니다.</p>
           <p class="about-benefits-note">실제 결과는 Skill 내용과 요청에 따라 달라집니다.</p>
+        </section>
+
+        <section class="about-repeat" aria-labelledby="repeat-title">
+          <div class="about-repeat-heading"><p class="about-overline">반복 작업</p><h2 id="repeat-title">다음 작업에도, 다른 프로젝트에도.</h2><p>작업 방식을 저장해두면 같은 프로젝트의 다른 화면은 물론, 새 프로젝트에서도 Skill 이름과 이번 요청만 전하면 됩니다.</p></div>
+          <div class="about-repeat-list">
+            <div class="about-repeat-row"><span>첫 화면</span><p>thoughtful-ui-design으로 가입 화면의 정보 계층과 버튼 반응을 다듬어줘.</p></div>
+            <div class="about-repeat-row"><span>다음 화면</span><p>thoughtful-ui-design으로 설정 화면도 같은 기준에서 살펴봐줘.</p></div>
+            <div class="about-repeat-row"><span>다른 프로젝트</span><p>thoughtful-ui-design으로 새 프로젝트의 모바일 결제 화면도 점검해줘.</p></div>
+          </div>
+          <p class="about-repeat-note">매번 디자인 기준을 다시 적는 대신, 이번에 손볼 화면과 목적에 집중할 수 있어요. 다른 프로젝트에서도 쓰려면 Skill을 사용할 수 있는 위치에 설치하세요.</p>
         </section>
 
         <section class="about-case" aria-labelledby="case-title">

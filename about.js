@@ -20,7 +20,7 @@ const exampleTabs = [...document.querySelectorAll('[data-example-tab]')];
 const examplePanels = [...document.querySelectorAll('[data-example-panel]')];
 const exampleWindow = document.querySelector('.about-ai-window');
 if ('IntersectionObserver' in window) {
-  const pageElements = document.querySelectorAll('.topbar > *, .about-intro > *, .about-definition > *, .about-chat-intro > *, .about-ai-tabs, .about-ai-caption, .about-benefits-note, .about-steps > h2, .about-step, .about-caveat, .about-next > *, .about-sources, .site-footer > *');
+  const pageElements = document.querySelectorAll('.topbar > *, .about-intro > *, .about-easy-start > *, .about-definition > *, .about-chat-intro > *, .about-ai-tabs, .about-ai-caption, .about-benefits-note, .about-steps > h2, .about-step, .about-caveat, .about-next > *, .about-sources, .site-footer > *');
   const messages = exampleWindow?.querySelectorAll('.about-ai-user, .about-ai-response') || [];
   const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
