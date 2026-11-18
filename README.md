@@ -11,7 +11,7 @@
 
 Skill Studio is a static, browser-based editor for drafting `SKILL.md` files for Codex and Claude Code. It supports manual writing, live preview, completeness checks, copying, and downloading. It does not generate drafts with AI, run your Skill, or install it automatically.
 
-For agent-assisted Skill authoring, this repository also includes a separate [Skill Studio Skill](./SKILL.md). Give that file to a compatible coding agent to help it turn a recurring workflow into a focused `SKILL.md`. The website itself remains a manual editor.
+For agent-assisted Skill authoring, use the separate [Skill Studio Skill repository](https://github.com/justcallmelightt/skillstudio-skill). Give its `SKILL.md` to a compatible coding agent to help it turn a recurring workflow into a focused Skill. The website itself remains a manual editor.
 
 **Implementation direction:** Start new Skill Studio development in TypeScript. If file processing or validation grows substantially, evaluate Python for those isolated tasks rather than adding it preemptively.
 
@@ -56,7 +56,7 @@ See [Privacy & Security](./SECURITY.md#privacy--security-english) for details.
 
 Skill Studio는 Codex와 Claude Code에서 사용할 `SKILL.md` 초안을 작성하는 정적 웹 편집기입니다. 직접 작성하고, 실시간 미리보기와 완성도 점검을 거쳐 내용을 복사하거나 파일로 다운로드할 수 있습니다. AI 초안 작성, Skill 실행, 도구에 자동 설치하는 기능은 제공하지 않습니다.
 
-AI의 도움으로 Skill을 만들고 싶다면 별도의 [Skill Studio Skill](./SKILL.md)을 코딩 에이전트에 제공할 수 있습니다. 반복 작업을 명확한 `SKILL.md`로 정리하도록 돕는 지침이며, 웹사이트 자체는 수동 편집기입니다.
+AI의 도움으로 Skill을 만들고 싶다면 별도의 [Skill Studio Skill 저장소](https://github.com/justcallmelightt/skillstudio-skill)에 있는 `SKILL.md`를 코딩 에이전트에 제공할 수 있습니다. 반복 작업을 명확한 Skill로 정리하도록 돕는 지침이며, 웹사이트 자체는 수동 편집기입니다.
 
 **개발 방향:** Skill Studio의 새 개발은 TypeScript로 시작합니다. 파일 처리나 검증 작업이 크게 늘어나면, 처음부터 Python을 추가하기보다 해당 작업에 한정해 도입을 검토합니다.
 
